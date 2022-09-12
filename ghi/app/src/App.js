@@ -16,13 +16,13 @@ function App() {
             <Route path="" element={<ManufacturerList/>} />
             <Route path="new" element={<ManufacturerForm/>} />
           </Route>
-          {/* <Route path="vehicle-models">
+          <Route path="vehicle-models">
             <Route path="" element={<VehicleModelList/>} />
             <Route path="new" element={<VehicleModelForm/>} />
-          </Route> */}
+          </Route>
           <Route path="automobiles">
             <Route path="" element={<AutomobileList/>} />
-            {/* <Route path="new" element={<AutomobileForm/>} /> */}
+            <Route path="new" element={<AutomobileForm/>} />
           </Route>
         </Routes>
       </div>
