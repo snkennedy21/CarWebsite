@@ -8,6 +8,9 @@ class SalesForm extends React.Component {
       sales_people: [],
       customers: [],
       sale_price: "",
+      automobile: "",
+      sales_person: "",
+      customer: "",
     };
   }
 
@@ -44,6 +47,10 @@ class SalesForm extends React.Component {
   async submitHandler(e) {
     e.preventDefault();
 
+    const resetData = { ...this.state };
+    resetData.automobiles.filter((automobile) => {
+      return automobile.vin !== this.state.automobile;
+    });
     const data = { ...this.state };
     delete data.automobiles;
     delete data.sales_people;
@@ -70,15 +77,18 @@ class SalesForm extends React.Component {
       },
     });
 
-    if (automobileResponse.ok) {
-      console.log("hooray");
-    }
-
     const response = await fetch(saleUrl, fetchConfigPost);
     if (response.ok) {
       const newSale = await response.json();
-      console.log(newSale);
     }
+
+    const cleared = {
+      automobile: "",
+      sales_person: "",
+      customer: "",
+      sale_price: "",
+    };
+    this.setState(cleared);
   }
 
   render() {
@@ -98,6 +108,7 @@ class SalesForm extends React.Component {
                   id="automobile"
                   className="form-select"
                   onChange={this.inputChangeHandler.bind(this)}
+                  value={this.state.automobile}
                 >
                   <option value="">Choose an Automobile</option>
                   {this.state.automobiles
@@ -120,6 +131,7 @@ class SalesForm extends React.Component {
                   id="sales_person"
                   className="form-select"
                   onChange={this.inputChangeHandler.bind(this)}
+                  value={this.state.sales_person}
                 >
                   <option value="">Choose a Sales Person</option>
                   {this.state.sales_people.map((sales_person) => {
@@ -138,6 +150,7 @@ class SalesForm extends React.Component {
                   id="customer"
                   className="form-select"
                   onChange={this.inputChangeHandler.bind(this)}
+                  value={this.state.customer}
                 >
                   <option value="">Choose a Customer</option>
                   {this.state.customers.map((customer) => {
@@ -158,6 +171,7 @@ class SalesForm extends React.Component {
                   id="sale_price"
                   className="form-control"
                   onChange={this.inputChangeHandler.bind(this)}
+                  value={this.state.sale_price}
                 />
                 <label htmlFor="sale_price">Sale Price</label>
               </div>
