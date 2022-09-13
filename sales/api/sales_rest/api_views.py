@@ -37,6 +37,7 @@ class SaleDetailEncoder(ModelEncoder):
     "sales_person",
     "customer",
     "sale_price",
+    "id",
   ]
 
   def get_extra_data(self, o):
@@ -59,12 +60,14 @@ class CustomerDetailEncoder(ModelEncoder):
     "name",
     "address",
     "phone_number",
+    "id",
   ]
 
 class CustomersListencoder(ModelEncoder):
   model = Customer
   properties = [
     "name",
+    "id",
   ]
 
 
@@ -76,6 +79,7 @@ class SalesPersonDetailEncoder(ModelEncoder):
   properties = [
     "name",
     "employee_number",
+    "id",
   ]
 
 class SalesPeopleListEncoder(ModelEncoder):
@@ -83,6 +87,7 @@ class SalesPeopleListEncoder(ModelEncoder):
   properties = [
     "name",
     "employee_number",
+    "id",
   ]
 
 
@@ -104,7 +109,7 @@ def api_sales(request, automobile_vo_id=None, employee_number=None,):
 
     return JsonResponse(
       sales,
-      encoder=SalesListEncoder,
+      encoder=SaleDetailEncoder,
       safe=False,
     )
   else:
@@ -122,10 +127,6 @@ def api_sales(request, automobile_vo_id=None, employee_number=None,):
       encoder=SaleDetailEncoder,
       safe=False,
     )
-
-    return JsonResponse({"Sales": "POST"})
-  
-  
 
 
 @require_http_methods(["GET", "PUT", "DELETE"])
