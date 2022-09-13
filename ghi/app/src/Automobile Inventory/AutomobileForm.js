@@ -47,7 +47,7 @@ class AutomobileForm extends React.Component {
       color: "",
       year: "",
       vin: "",
-      models: [],
+      model: "",
     };
 
     this.setState(clear);
@@ -114,6 +114,7 @@ class AutomobileForm extends React.Component {
                   id="model_id"
                   className="form-select"
                   onChange={this.inputChangeHandler.bind(this)}
+                  value={this.state.model}
                 >
                   <option value="">Choose a Model</option>
                   {this.state.models.map((model) => {
