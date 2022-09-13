@@ -48,7 +48,7 @@ class SalesForm extends React.Component {
     e.preventDefault();
 
     const resetData = { ...this.state };
-    resetData.automobiles.filter((automobile) => {
+    resetData.automobiles = resetData.automobiles.filter((automobile) => {
       return automobile.vin !== this.state.automobile;
     });
     const data = { ...this.state };
@@ -83,6 +83,7 @@ class SalesForm extends React.Component {
     }
 
     const cleared = {
+      automobiles: resetData.automobiles,
       automobile: "",
       sales_person: "",
       customer: "",
