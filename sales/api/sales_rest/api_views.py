@@ -5,9 +5,9 @@ from common.json import ModelEncoder
 from .models import AutomobileVO, SalesPerson, Customer, Sale
 
 
-############
-# Encoders #
-############
+#######################
+# Automobile Encoders #
+#######################
 class AutomobileVODetailEncoder(ModelEncoder):
   model = AutomobileVO
   properties = [
@@ -15,6 +15,10 @@ class AutomobileVODetailEncoder(ModelEncoder):
     "import_href",
   ]
 
+
+##################
+# Sales Encoders #
+##################
 class SalesListEncoder(ModelEncoder):
   model = Sale
   properties = [
@@ -45,6 +49,10 @@ class SaleDetailEncoder(ModelEncoder):
     "automobile": AutomobileVODetailEncoder(),
   }
 
+
+#####################
+# Customer Encoders #
+#####################
 class CustomerDetailEncoder(ModelEncoder):
   model = Customer
   properties = [
@@ -59,6 +67,10 @@ class CustomersListencoder(ModelEncoder):
     "name",
   ]
 
+
+#########################
+# Sales People Encoders #
+#########################
 class SalesPersonDetailEncoder(ModelEncoder):
   model = SalesPerson
   properties = [
@@ -70,6 +82,7 @@ class SalesPeopleListEncoder(ModelEncoder):
   model = SalesPerson
   properties = [
     "name",
+    "employee_number",
   ]
 
 
@@ -77,9 +90,17 @@ class SalesPeopleListEncoder(ModelEncoder):
 # Sale REST API #
 #################
 @require_http_methods(["GET", "POST"])
-def api_sales(request, automobile_vo_id=None):
+def api_sales(request, automobile_vo_id=None, employee_number=None,):
   if request.method == "GET":
-    sales = Sale.objects.all()
+    if automobile_vo_id is not None:
+      automobile_href = f'/api/automobiles/{automobile_vo_id}/'
+      automobile = AutomobileVO.objects.get(import_href=automobile_href)
+      sales = Sale.objects.filter(automobile=automobile)
+    elif employee_number is not None:
+      sales_person = SalesPerson.objects.get(employee_number=employee_number)
+      sales = Sale.objects.filter(sales_person=sales_person)
+    else:
+      sales = Sale.objects.all()
 
     return JsonResponse(
       sales,
