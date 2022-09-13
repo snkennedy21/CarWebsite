@@ -22,6 +22,10 @@ class SalesListEncoder(ModelEncoder):
     "sale_price",
   ]
 
+  encoders = {
+    "automobile": AutomobileVODetailEncoder(),
+  }
+
 class SaleDetailEncoder(ModelEncoder):
   model = Sale
   properties = [
@@ -30,6 +34,16 @@ class SaleDetailEncoder(ModelEncoder):
     "customer",
     "sale_price",
   ]
+
+  def get_extra_data(self, o):
+    return {
+      "sales_person": o.sales_person.name,
+      "customer": o.customer.name
+    }
+
+  encoders = {
+    "automobile": AutomobileVODetailEncoder(),
+  }
 
 class CustomerDetailEncoder(ModelEncoder):
   model = Customer
@@ -65,12 +79,20 @@ class SalesPeopleListEncoder(ModelEncoder):
 @require_http_methods(["GET", "POST"])
 def api_sales(request, automobile_vo_id=None):
   if request.method == "GET":
-    return JsonResponse({"Sales": "GET"})
+    sales = Sale.objects.all()
+
+    return JsonResponse(
+      sales,
+      encoder=SalesListEncoder,
+      safe=False,
+    )
   else:
     content = json.loads(request.body)
     automobile_href = f'/api/automobiles/{automobile_vo_id}/'
     automobile = AutomobileVO.objects.get(import_href=automobile_href)
     content["automobile"] = automobile
+    content["sales_person"] = SalesPerson.objects.get(id=content["sales_person"])
+    content["customer"] = Customer.objects.get(id=content["customer"])
 
     sale = Sale.objects.create(**content)
 
