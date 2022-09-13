@@ -135,7 +135,8 @@ def api_sale(request):
     return JsonResponse({"Sale": "GET"})
 
   elif request.method == "PUT":
-    return JsonResponse({"Sale": "PUT"})
+    content = json.loads(request.body)
+    print(content)
 
   else:
     return JsonResponse({"Sale": "DELETE"})

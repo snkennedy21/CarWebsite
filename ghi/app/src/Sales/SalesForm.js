@@ -22,19 +22,16 @@ class SalesForm extends React.Component {
 
     if (automobilesResponse.ok) {
       const automobilesData = await automobilesResponse.json();
-      console.log(automobilesData);
       this.setState({ automobiles: automobilesData.autos });
     }
 
     if (salesPeopleResponse.ok) {
       const salesPeopleData = await salesPeopleResponse.json();
-      console.log(salesPeopleData);
       this.setState({ sales_people: salesPeopleData });
     }
 
     if (customersReponse.ok) {
       const customersData = await customersReponse.json();
-      console.log(customersData);
       this.setState({ customers: customersData });
     }
   }
@@ -46,13 +43,14 @@ class SalesForm extends React.Component {
 
   async submitHandler(e) {
     e.preventDefault();
+
     const data = { ...this.state };
     delete data.automobiles;
     delete data.sales_people;
     delete data.customers;
 
     const saleUrl = `http://localhost:8090/api/automobiles/${data.automobile}/sales/`;
-    const fetchConfig = {
+    const fetchConfigPost = {
       method: "post",
       body: JSON.stringify(data),
       headers: {
@@ -60,7 +58,21 @@ class SalesForm extends React.Component {
       },
     };
 
-    const response = await fetch(saleUrl, fetchConfig);
+    const automobileUrl = `http://localhost:8100/api/automobiles/${data.automobile}/`;
+
+    const automobileResponse = await fetch(automobileUrl, {
+      method: "put",
+      body: JSON.stringify({ is_sold: true }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (automobileResponse.ok) {
+      console.log("hooray");
+    }
+
+    const response = await fetch(saleUrl, fetchConfigPost);
     if (response.ok) {
       const newSale = await response.json();
       console.log(newSale);
@@ -86,13 +98,17 @@ class SalesForm extends React.Component {
                   onChange={this.inputChangeHandler.bind(this)}
                 >
                   <option value="">Choose an Automobile</option>
-                  {this.state.automobiles.map((automobile) => {
-                    return (
-                      <option key={automobile.id} value={automobile.vin}>
-                        {automobile.vin}
-                      </option>
-                    );
-                  })}
+                  {this.state.automobiles
+                    .filter((automobile) => {
+                      return automobile.is_sold == false;
+                    })
+                    .map((automobile) => {
+                      return (
+                        <option key={automobile.id} value={automobile.vin}>
+                          {automobile.vin}
+                        </option>
+                      );
+                    })}
                 </select>
               </div>
               <div className="mb-3">
