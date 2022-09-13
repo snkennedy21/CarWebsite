@@ -22,7 +22,7 @@ class SalesListEncoder(ModelEncoder):
     "sale_price",
   ]
 
-class SalesDetailEncoder(ModelEncoder):
+class SaleDetailEncoder(ModelEncoder):
   model = Sale
   properties = [
     "automobile",
@@ -39,6 +39,12 @@ class CustomerDetailEncoder(ModelEncoder):
     "phone_number",
   ]
 
+class CustomersListencoder(ModelEncoder):
+  model = Customer
+  properties = [
+    "name",
+  ]
+
 class SalesPersonDetailEncoder(ModelEncoder):
   model = SalesPerson
   properties = [
@@ -46,17 +52,37 @@ class SalesPersonDetailEncoder(ModelEncoder):
     "employee_number",
   ]
 
+class SalesPeopleListEncoder(ModelEncoder):
+  model = SalesPerson
+  properties = [
+    "name",
+  ]
+
 
 #################
 # Sale REST API #
 #################
 @require_http_methods(["GET", "POST"])
-def api_sales(request):
+def api_sales(request, automobile_vo_id=None):
   if request.method == "GET":
     return JsonResponse({"Sales": "GET"})
-  
   else:
+    content = json.loads(request.body)
+    automobile_href = f'/api/automobiles/{automobile_vo_id}/'
+    automobile = AutomobileVO.objects.get(import_href=automobile_href)
+    content["automobile"] = automobile
+
+    sale = Sale.objects.create(**content)
+
+    return JsonResponse(
+      sale,
+      encoder=SaleDetailEncoder,
+      safe=False,
+    )
+
     return JsonResponse({"Sales": "POST"})
+  
+  
 
 
 @require_http_methods(["GET", "PUT", "DELETE"])
@@ -74,17 +100,46 @@ def api_sale(request):
 #####################
 # Customer REST API #
 #####################
-@require_http_methods(["PUT"])
+@require_http_methods(["GET", "POST"])
 def api_customer(request):
-  if request.method == "PUT":
-    return JsonResponse({"Customer": "PUT"})
+  if request.method == "GET":
+    customers = Customer.objects.all()
+    return JsonResponse(
+      customers,
+      encoder=CustomersListencoder,
+      safe=False,
+    )
+  else:
+    content = json.loads(request.body)
+    customer = Customer.objects.create(**content)
+
+    return JsonResponse(
+      customer,
+      encoder=CustomerDetailEncoder,
+      safe=False,
+    )
+
 
 
 #########################
 # Sales Person REST API #
 #########################
-@require_http_methods(["PUT"])
+@require_http_methods(["GET", "POST"])
 def api_sales_person(request):
-  if request.method == "PUT":
-    return JsonResponse({"Sales Person": "PUT"})
+  if request.method == "GET":
+    sales_people = SalesPerson.objects.all()
+    return JsonResponse(
+      sales_people,
+      encoder=SalesPeopleListEncoder,
+      safe=False,
+    )
+  else:
+    content = json.loads(request.body)
+    sales_person = SalesPerson.objects.create(**content)
+
+    return JsonResponse(
+      sales_person,
+      encoder=SalesPersonDetailEncoder,
+      safe=False,
+    )
 
