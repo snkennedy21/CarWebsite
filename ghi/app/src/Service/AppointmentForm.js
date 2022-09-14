@@ -21,7 +21,6 @@ class AppointmentForm extends React.Component {
         const automobilesResponse = await fetch(automobilesUrl);
         if (automobilesResponse.ok) {
             const automobilesData = await automobilesResponse.json();
-            console.log(automobilesData);
             this.setState({automobiles: automobilesData.autos});
         } else {
             throw new Error("automobiles response not ok");
@@ -31,7 +30,6 @@ class AppointmentForm extends React.Component {
         const techniciansResponse = await fetch(techniciansUrl);
         if (techniciansResponse.ok) {
             const techniciansData = await techniciansResponse.json();
-            console.log(techniciansData);
             this.setState({technicians: techniciansData.technicians});
         } else {
             throw new Error("technicians response not ok");
@@ -46,6 +44,8 @@ class AppointmentForm extends React.Component {
         const vin = data.automobile;
         const appointmentUrl = `http://localhost:8080/api/appointments/${vin}/`;
         delete data.automobile;
+        delete data.automobiles;
+        delete data.technicians;
         const fetchConfig = {
             method: "post",
             body: JSON.stringify(data),
@@ -93,10 +93,32 @@ class AppointmentForm extends React.Component {
                                         })}
                                     </select>
                                 </div>
-                                {/* <div className="form-floating mb-3">
-                                    <input onChange={this.handleChange.bind(this)} value={this.state.number} placeholder="number" required id="number" type="number" name="number" className="form-control" />
-                                    <label htmlFor="number">Employee number</label>
-                                </div> */}
+                                <div className="form-floating mb-3">
+                                    <input onChange={this.handleChange.bind(this)} value={this.state.customer} placeholder="customer" required id="customer" type="text" name="customer" className="form-control" />
+                                    <label htmlFor="customer">Customer name</label>
+                                </div>
+                                <div className="form-floating mb-3">
+                                    <input onChange={this.handleChange.bind(this)} value={this.state.date} placeholder="date" required id="date" type="date" name="date" className="form-control" />
+                                    <label htmlFor="date">Date</label>
+                                </div>
+                                <div className="form-floating mb-3">
+                                    <input onChange={this.handleChange.bind(this)} value={this.state.time} placeholder="time" required id="time" type="time" name="time" className="form-control" />
+                                    <label htmlFor="time">Time</label>
+                                </div>
+                                <div className="mb-3">
+                                    <select onChange={this.handleChange.bind(this)} value={this.state.technician} required placeholder="technician" name="technician" id="technician" className="form-select">
+                                        <option value="">Choose a technician</option>
+                                        {this.state.technicians.map(technician => {
+                                            return (
+                                                <option key={technician.number} value={technician.number}>{technician.name} ({technician.number})</option>
+                                            )
+                                        })}
+                                    </select>
+                                </div>
+                                <div className="form-floating mb-3">
+                                    <input onChange={this.handleChange.bind(this)} value={this.state.reason} placeholder="reason" required id="reason" type="text" name="reason" className="form-control" />
+                                    <label htmlFor="reason">Reason</label>
+                                </div>
                                 <button className="btn btn-primary">Create</button>
                             </form>
                         </div>
