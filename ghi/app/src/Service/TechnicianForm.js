@@ -48,8 +48,8 @@ class TechnicianForm extends React.Component {
                                     <label htmlFor="name">Name</label>
                                 </div>
                                 <div className="form-floating mb-3">
-                                    <input onChange={this.handleChange.bind(this)} value={this.state.number} placeholder="number" required id="number" type="number" name="number" className="form-control" />
-                                    <label htmlFor="number">Employee number</label>
+                                    <input onChange={this.handleChange.bind(this)} value={this.state.number} placeholder="number" required id="number" type="text" name="number" className="form-control" />
+                                    <label htmlFor="number">Employee ID</label>
                                 </div>
                                 <button className="btn btn-primary">Create</button>
                             </form>

@@ -68,7 +68,7 @@ class AppointmentList extends React.Component {
                 // change customer to match customer name
                 appointment.customer = customerData.find(customer => customer.id == appointment.customer);
                 // add is_sold attribute if appointment VIN matches sales record
-                appointment.is_VIP = automobilesData.autos.filter(auto => auto.is_sold).map(auto => auto.vin).includes(appointment.automobile.vin)
+                appointment.is_VIP = automobilesData.autos.filter(auto => auto.is_sold).map(auto => auto.vin).includes(appointment.vin)
             });
             this.setState({
                 appointments: data.appointments,
@@ -99,7 +99,7 @@ class AppointmentList extends React.Component {
                             return (
                                 <tr key={appointment.href}>
                                     <td className={appointment.is_VIP ? "align-middle text-success font-weight-bold" : "align-middle"}>{appointment.customer.name}</td>
-                                    <td className={appointment.is_VIP ? "align-middle text-success font-weight-bold" : "align-middle"}>{appointment.automobile.vin}</td>
+                                    <td className={appointment.is_VIP ? "align-middle text-success font-weight-bold" : "align-middle"}>{appointment.vin}</td>
                                     <td className={appointment.is_VIP ? "align-middle text-success font-weight-bold" : "align-middle"}>{appointment.date}</td>
                                     <td className={appointment.is_VIP ? "align-middle text-success font-weight-bold" : "align-middle"}>{appointment.time}</td>
                                     <td className={appointment.is_VIP ? "align-middle text-success font-weight-bold" : "align-middle"}>{appointment.technician.name}</td>

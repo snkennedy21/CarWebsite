@@ -8,7 +8,7 @@ urlpatterns = [
         name="api_list_technicians",
     ),
     path( # show specific technician
-        "technicians/<int:number>/",
+        "technicians/<str:number>/",
         api_show_technician,
         name="api_show_technician",
     ),

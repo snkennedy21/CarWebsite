@@ -12,7 +12,7 @@ class AutomobileVO(models.Model):
 
 class Technician(models.Model):
     name = models.CharField(max_length=200)
-    number = models.PositiveSmallIntegerField(unique=True)
+    number = models.CharField(max_length=10, unique=True)
 
     def __str__(self):
         return f'{self.name} - {self.number}'
@@ -21,11 +21,7 @@ class Technician(models.Model):
         return reverse("api_show_technician", kwargs={"number": self.number})
 
 class Appointment(models.Model):
-    automobile = models.ForeignKey(
-        AutomobileVO,
-        related_name="appointments",
-        on_delete=models.CASCADE,
-    )
+    vin = models.CharField(max_length=17, null=True)
 
     customer = models.CharField(max_length=200)
 

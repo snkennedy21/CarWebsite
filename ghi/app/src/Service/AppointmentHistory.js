@@ -70,7 +70,7 @@ class AppointmentHistory extends React.Component {
                         {this.state.appointments.map((appointment) => {
                             return (
                                 <tr key={appointment.href}>
-                                    <td className="align-middle">{appointment.automobile.vin}</td>
+                                    <td className="align-middle">{appointment.vin}</td>
                                     <td className="align-middle">{appointment.customer.name}</td>
                                     <td className="align-middle">{appointment.date}</td>
                                     <td className="align-middle">{appointment.time}</td>
