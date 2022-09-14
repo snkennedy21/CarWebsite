@@ -5,7 +5,7 @@ class ManufacturerForm extends React.Component {
         super(props);
         this.state = {
             name: "",
-        }
+        };
     }
 
     async handleSubmit(e) {
