@@ -4,7 +4,7 @@ import Nav from "./Nav";
 import VehicleModelForm from "./Vehicle models/VehicleModelForm";
 import VehicleModelList from "./Vehicle models/VehicleModelList";
 import ManufacturerForm from "./Manufacturers/ManufacturerForm";
-import ManufacturerList from "./Manufacturers/ManufacturerList";
+import ManufacturerListFunction from "./Manufacturers/ManufacturerListFunction";
 import AutomobileForm from "./Automobile Inventory/AutomobileForm";
 import AutomobileList from "./Automobile Inventory/AutomobileList";
 import SalesForm from "./Sales/SalesForm";
@@ -18,7 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="manufacturers">
-            <Route path="" element={<ManufacturerList />} />
+            <Route path="" element={<ManufacturerListFunction />} />
             <Route path="new" element={<ManufacturerForm />} />
           </Route>
           <Route path="vehicle-models">
