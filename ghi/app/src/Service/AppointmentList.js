@@ -10,7 +10,7 @@ class AppointmentList extends React.Component {
 
     async handleCancel(e) {
         const href = e.target.value;
-        const url = `http://localhost:8080${href}`
+        const url = `http://localhost:8080${href}`;
         const fetchConfig = {
             method: "delete",
             headers: {
@@ -20,7 +20,7 @@ class AppointmentList extends React.Component {
         const response = await fetch(url, fetchConfig);
         if (response.ok) {
             this.setState({appointments: this.state.appointments.filter(appointment => appointment.href !== href)});
-            console.log(`Appointment successfully deleted: ${href}`)
+            console.log(`Appointment successfully deleted: ${href}`);
         }
     }
 
@@ -54,10 +54,10 @@ class AppointmentList extends React.Component {
                 if (hours === "00") {
                     hours = "12"; // in case some insane person is getting work done between 12a-1a (after setting am/pm)
                 } else if (Number(hours) >= 13) {
-                    hours = String(Number(hours)-12);
+                    hours = String(Number(hours)-12); // translate from military time
                 }
                 appointment.time = `${hours}:${mins} ${amOrPm}`;
-            })
+            });
             this.setState({appointments: data.appointments});
         } else {
             throw new Error("response not ok");
