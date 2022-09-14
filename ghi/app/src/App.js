@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainPage from "./MainPage";
 import Nav from "./Nav";
-import VehicleModelForm from "./Vehicle models/VehicleModelForm";
-import VehicleModelList from "./Vehicle models/VehicleModelList";
-import ManufacturerForm from "./Manufacturers/ManufacturerForm";
+import VehicleModelFormFunction from "./Vehicle models/VehicleModelFormFunction";
+import VehicleModelListFunction from "./Vehicle models/VehicleModelListFunction";
+import ManufacturerFormFunction from "./Manufacturers/ManufacturerFormFunction";
 import ManufacturerListFunction from "./Manufacturers/ManufacturerListFunction";
 import AutomobileForm from "./Automobile Inventory/AutomobileForm";
 import AutomobileList from "./Automobile Inventory/AutomobileList";
@@ -19,11 +19,11 @@ function App() {
           <Route path="/" element={<MainPage />} />
           <Route path="manufacturers">
             <Route path="" element={<ManufacturerListFunction />} />
-            <Route path="new" element={<ManufacturerForm />} />
+            <Route path="new" element={<ManufacturerFormFunction />} />
           </Route>
           <Route path="vehicle-models">
-            <Route path="" element={<VehicleModelList />} />
-            <Route path="new" element={<VehicleModelForm />} />
+            <Route path="" element={<VehicleModelListFunction />} />
+            <Route path="new" element={<VehicleModelFormFunction />} />
           </Route>
           <Route path="automobiles">
             <Route path="" element={<AutomobileList />} />

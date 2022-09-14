@@ -1,43 +1,43 @@
 import React from "react";
 
 class ManufacturerForm extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            name: "",
-        }
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: "",
+    };
+  }
+
+  async handleSubmit(e) {
+    e.preventDefault();
+    const data = { ...this.state };
+    const manufacturerUrl = "http://localhost:8100/api/manufacturers/";
+    const fetchConfig = {
+      method: "post",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const response = await fetch(manufacturerUrl, fetchConfig);
+
+    if (response.ok) {
+      const newManufacturer = await response.json();
+      console.log("new manufacturer created:", newManufacturer);
+      this.setState({ name: "" });
+    } else {
+      throw new Error("response not ok");
     }
+  }
 
-    async handleSubmit(e) {
-        e.preventDefault();
-        const data = { ...this.state };
-        const manufacturerUrl = "http://localhost:8100/api/manufacturers/";
-        const fetchConfig = {
-            method: "post",
-            body: JSON.stringify(data),
-            headers: {
-                "Content-Type": "application/json",
-            },
-        };
-        const response = await fetch(manufacturerUrl, fetchConfig);
+  handleChangeManufacturerName(e) {
+    const value = e.target.value;
+    this.setState({ name: value });
+  }
 
-        if (response.ok) {
-            const newManufacturer = await response.json();
-            console.log("new manufacturer created:", newManufacturer);
-            this.setState({name: ""});
-        } else {
-            throw new Error("response not ok");
-        }
-    }
-
-    handleChangeManufacturerName(e) {
-        const value = e.target.value;
-        this.setState({ name: value });
-    }
-
-    render() {
-        return (
-        <div className="container mb-4">
+  render() {
+    return (
+      <div className="container mb-4">
         <div className="row">
           <div className="offset-3 col-6">
             <div className="shadow p-4 mt-4">
@@ -64,9 +64,9 @@ class ManufacturerForm extends React.Component {
             </div>
           </div>
         </div>
-        </div>
-        )
-    }
+      </div>
+    );
+  }
 }
 
 export default ManufacturerForm;
