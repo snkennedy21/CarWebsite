@@ -5,6 +5,7 @@ class AppointmentList extends React.Component {
         super();
         this.state = {
             appointments: [],
+            automobiles: [],
         }
     }
 
@@ -43,11 +44,18 @@ class AppointmentList extends React.Component {
 
     async componentDidMount() {
         const appointmentsUrl = "http://localhost:8080/api/appointments/";
+        const customersUrl = "http://localhost:8090/api/customer/";
+        const automobilesUrl = "http://localhost:8100/api/automobiles/";
+        const automobilesResponse = await fetch(automobilesUrl);
+        const automobilesData = await automobilesResponse.json();
+        console.log(automobilesData);
+        const customerResponse = await fetch(customersUrl);
+        const customerData = await customerResponse.json();
         const response = await fetch(appointmentsUrl);
-        if (response.ok) {
+        if (response.ok && automobilesResponse.ok && customerResponse.ok) {
             const data = await response.json();
-            // change timefield to look nicer
             data.appointments.map(appointment => {
+                // change timefield to look nicer
                 var hours = appointment.time.slice(0,2);
                 var mins = appointment.time.slice(3,5);
                 var amOrPm = Number(hours) < 12 ? "a.m." : "p.m.";
@@ -57,10 +65,16 @@ class AppointmentList extends React.Component {
                     hours = String(Number(hours)-12); // translate from military time
                 }
                 appointment.time = `${hours}:${mins} ${amOrPm}`;
+                // change customer to match customer name
+                appointment.customer = customerData.find(customer => customer.id == appointment.customer);
+                // add is_sold attribute if appointment VIN matches sales record
+                appointment.is_VIP = automobilesData.autos.filter(auto => auto.is_sold).map(auto => auto.vin).includes(appointment.automobile.vin)
             });
-            this.setState({appointments: data.appointments});
+            this.setState({
+                appointments: data.appointments,
+            });
         } else {
-            throw new Error("response not ok");
+            throw new Error("something is not ok");
         }
     }
 
@@ -84,12 +98,12 @@ class AppointmentList extends React.Component {
                         {this.state.appointments.filter(appointment => !appointment.finished).map((appointment) => {
                             return (
                                 <tr key={appointment.href}>
-                                    <td className="align-middle">{appointment.automobile.vin}</td>
-                                    <td className="align-middle">{appointment.customer}</td>
-                                    <td className="align-middle">{appointment.date}</td>
-                                    <td className="align-middle">{appointment.time}</td>
-                                    <td className="align-middle">{appointment.technician.name}</td>
-                                    <td className="align-middle">{appointment.reason}</td>
+                                    <td className={appointment.is_VIP ? "align-middle text-success font-weight-bold" : "align-middle"}>{appointment.customer.name}</td>
+                                    <td className={appointment.is_VIP ? "align-middle text-success font-weight-bold" : "align-middle"}>{appointment.automobile.vin}</td>
+                                    <td className={appointment.is_VIP ? "align-middle text-success font-weight-bold" : "align-middle"}>{appointment.date}</td>
+                                    <td className={appointment.is_VIP ? "align-middle text-success font-weight-bold" : "align-middle"}>{appointment.time}</td>
+                                    <td className={appointment.is_VIP ? "align-middle text-success font-weight-bold" : "align-middle"}>{appointment.technician.name}</td>
+                                    <td className={appointment.is_VIP ? "align-middle text-success font-weight-bold" : "align-middle"}>{appointment.reason}</td>
                                     <td className="align-middle">
                                         <div className="btn-group" role="group" aria-label="Cancel/Finished">
                                             <button type="button" className="btn btn-danger" onClick={this.handleCancel.bind(this)} value={appointment.href}>Cancel</button>
@@ -101,6 +115,7 @@ class AppointmentList extends React.Component {
                         })}
                     </tbody>
                 </table>
+                <div className="my-3 text-center text-success font-weight-bold"><p>VIP customers in green</p></div>
             </div>
         )
     }

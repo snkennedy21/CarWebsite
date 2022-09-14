@@ -14,6 +14,9 @@ class AppointmentHistory extends React.Component {
         // search for automobiles by VIN
         const searchUrl = `http://localhost:8080/api/appointments/${this.state.search}/`;
         const searchResponse = await fetch(searchUrl);
+        const customersUrl = "http://localhost:8090/api/customer/";
+        const customerResponse = await fetch(customersUrl);
+        const customerData = await customerResponse.json();
         if (searchResponse.ok) {
             const data = await searchResponse.json();
             // change timefield to look nicer
@@ -27,7 +30,12 @@ class AppointmentHistory extends React.Component {
                     hours = String(Number(hours)-12); // translate from military time
                 }
                 appointment.time = `${hours}:${mins} ${amOrPm}`;
+                // change customer field to match customer name
+                console.log(customerData);
+                console.log("appointment.customer", appointment.customer);
+                appointment.customer = customerData.find(customer => customer.id == appointment.customer);
             });
+            console.log(data.appointments);
             this.setState({appointments: data.appointments});
         } else {
             throw new Error("search response not ok");
@@ -63,7 +71,7 @@ class AppointmentHistory extends React.Component {
                             return (
                                 <tr key={appointment.href}>
                                     <td className="align-middle">{appointment.automobile.vin}</td>
-                                    <td className="align-middle">{appointment.customer}</td>
+                                    <td className="align-middle">{appointment.customer.name}</td>
                                     <td className="align-middle">{appointment.date}</td>
                                     <td className="align-middle">{appointment.time}</td>
                                     <td className="align-middle">{appointment.technician.name}</td>

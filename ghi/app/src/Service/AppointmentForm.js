@@ -5,26 +5,35 @@ class AppointmentForm extends React.Component {
         super(props);
         this.state = {
             automobile: "",
+            // automobiles: [],
             customer: "",
+            customers: [],
             technician: "",
             date: "",
             time: "",
             reason: "",
-            automobiles: [],
             technicians: [],
         };
     }
 
     async componentDidMount() {
         // populate automobile VIN list
-        const automobilesUrl = "http://localhost:8100/api/automobiles/";
-        const automobilesResponse = await fetch(automobilesUrl);
-        if (automobilesResponse.ok) {
-            const automobilesData = await automobilesResponse.json();
-            this.setState({automobiles: automobilesData.autos});
-        } else {
-            throw new Error("automobiles response not ok");
-        }
+        // const automobilesUrl = "http://localhost:8100/api/automobiles/";
+        // const automobilesResponse = await fetch(automobilesUrl);
+        // if (automobilesResponse.ok) {
+        //     const automobilesData = await automobilesResponse.json();
+        //     this.setState({automobiles: automobilesData.autos});
+        // } else {
+        //     throw new Error("automobiles response not ok");
+        // }
+        // populate customer list
+        const customersUrl = "http://localhost:8090/api/customer/";
+        const customersReponse = await fetch(customersUrl);
+        if (customersReponse.ok) {
+            const customersData = await customersReponse.json();
+            this.setState({ customers: customersData });
+          }
+
         // populate technician list
         const techniciansUrl = "http://localhost:8080/api/technicians/";
         const techniciansResponse = await fetch(techniciansUrl);
@@ -44,8 +53,9 @@ class AppointmentForm extends React.Component {
         const vin = data.automobile;
         const appointmentUrl = `http://localhost:8080/api/appointments/${vin}/`;
         delete data.automobile;
-        delete data.automobiles;
+        // delete data.automobiles;
         delete data.technicians;
+        delete data.customers;
         const fetchConfig = {
             method: "post",
             body: JSON.stringify(data),
@@ -83,7 +93,7 @@ class AppointmentForm extends React.Component {
                         <div className="shadow p-4 mt-4">
                             <h1>Create a new appointment</h1>
                             <form onSubmit={this.handleSubmit.bind(this)} id="create-appointment-form">
-                                <div className="mb-3">
+                                {/* <div className="mb-3">
                                     <select onChange={this.handleChange.bind(this)} value={this.state.automobile} required placeholder="automobile" name="automobile" id="automobile" className="form-select">
                                         <option value="">Choose an automobile</option>
                                         {this.state.automobiles.map(auto => {
@@ -92,10 +102,20 @@ class AppointmentForm extends React.Component {
                                             )
                                         })}
                                     </select>
-                                </div>
+                                </div> */}
                                 <div className="form-floating mb-3">
-                                    <input onChange={this.handleChange.bind(this)} value={this.state.customer} placeholder="customer" required id="customer" type="text" name="customer" className="form-control" />
-                                    <label htmlFor="customer">Customer name</label>
+                                    <input onChange={this.handleChange.bind(this)} value={this.state.automobile} placeholder="Enter VIN" required id="automobile" type="text" name="automobile" className="form-control" />
+                                    <label htmlFor="automobile">Enter VIN</label>
+                                </div>
+                                <div className="mb-3">
+                                    <select onChange={this.handleChange.bind(this)} value={this.state.customer} required placeholder="customer" name="customer" id="customer" className="form-select">
+                                        <option value="">Choose a customer</option>
+                                        {this.state.customers.map(customer => {
+                                            return (
+                                                <option key={customer.id} value={customer.id}>{customer.name}</option>
+                                            )
+                                        })}
+                                    </select>
                                 </div>
                                 <div className="form-floating mb-3">
                                     <input onChange={this.handleChange.bind(this)} value={this.state.date} placeholder="date" required id="date" type="date" name="date" className="form-control" />
