@@ -39,6 +39,14 @@ class VehicleModelForm extends React.Component {
     if (response.ok) {
       const newModel = await response.json();
     }
+
+    const cleared = {
+      name: "",
+      picture_url: "",
+      manufactuer: "",
+    };
+
+    this.setState(cleared);
   }
 
   inputChangeHandler(e) {
@@ -66,6 +74,7 @@ class VehicleModelForm extends React.Component {
                   id="name"
                   className="form-control"
                   onChange={this.inputChangeHandler.bind(this)}
+                  value={this.state.name}
                 />
                 <label htmlFor="name">Name</label>
               </div>
@@ -78,6 +87,7 @@ class VehicleModelForm extends React.Component {
                   id="picture_url"
                   className="form-control"
                   onChange={this.inputChangeHandler.bind(this)}
+                  value={this.state.picture_url}
                 />
                 <label htmlFor="picture_url">Picture URL</label>
               </div>
@@ -88,6 +98,7 @@ class VehicleModelForm extends React.Component {
                   id="manufacturer_id"
                   className="form-select"
                   onChange={this.inputChangeHandler.bind(this)}
+                  value={this.state.manufactuer}
                 >
                   <option value="">Choose a Manufacturer</option>
                   {this.state.manufacturers.map((manufacturer) => {
