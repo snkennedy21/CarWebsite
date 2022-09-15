@@ -23,28 +23,25 @@ function VehicleModelList() {
   return (
     <React.Fragment>
       <h1>Vehicle Models</h1>
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Manufacturer</th>
-            <th scope="col">Picture</th>
-          </tr>
-        </thead>
-        <tbody>
+      <div class="container">
+        <div class="row">
           {models.map((model) => {
             return (
-              <tr key={model.id}>
-                <td>{model.name}</td>
-                <td>{model.manufacturer.name}</td>
-                <td>
-                  <img src={model.picture_url} />
-                </td>
-              </tr>
+              <div class="col-4 shadow-lg p-3 mb-5 bg-body rounded">
+                <img
+                  class="card-img-top"
+                  src={model.picture_url}
+                  alt="Card image cap"
+                ></img>
+                <div class="card-body">
+                  <h5 class="card-title">{model.name}</h5>
+                  <p class="card-text">{model.manufacturer.name}</p>
+                </div>
+              </div>
             );
           })}
-        </tbody>
-      </table>
+        </div>
+      </div>
     </React.Fragment>
   );
 }
