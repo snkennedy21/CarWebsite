@@ -6,7 +6,7 @@ import VehicleModelListFunction from "./Vehicle models/VehicleModelListFunction"
 import ManufacturerFormFunction from "./Manufacturers/ManufacturerFormFunction";
 import ManufacturerListFunction from "./Manufacturers/ManufacturerListFunction";
 import AutomobileForm from "./Automobile Inventory/AutomobileForm";
-import AutomobileList from "./Automobile Inventory/AutomobileList";
+import AutomobileListFunction from "./Automobile Inventory/AutomobileListFunction";
 import SalesForm from "./Sales/SalesForm";
 import SalesList from "./Sales/SalesList";
 
@@ -26,7 +26,7 @@ function App() {
             <Route path="new" element={<VehicleModelFormFunction />} />
           </Route>
           <Route path="automobiles">
-            <Route path="" element={<AutomobileList />} />
+            <Route path="" element={<AutomobileListFunction />} />
             <Route path="new" element={<AutomobileForm />} />
           </Route>
           <Route path="sales">
