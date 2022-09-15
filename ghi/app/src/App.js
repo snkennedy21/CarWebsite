@@ -1,22 +1,22 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainPage from "./MainPage";
 import Nav from "./Nav";
-import VehicleModelForm from "./Vehicle models/VehicleModelForm";
-import VehicleModelList from "./Vehicle models/VehicleModelList";
-import ManufacturerForm from "./Manufacturers/ManufacturerForm";
-import ManufacturerList from "./Manufacturers/ManufacturerList";
-import AutomobileForm from "./Automobile Inventory/AutomobileForm";
-import AutomobileList from "./Automobile Inventory/AutomobileList";
 import AppointmentForm from "./Service/AppointmentForm";
 import AppointmentList from "./Service/AppointmentList";
 import AppointmentHistory from "./Service/AppointmentHistory";
 import TechnicianForm from "./Service/TechnicianForm";
-import SalesForm from "./Sales/SalesForm";
-import SalesList from "./Sales/SalesList";
 import CustomerForm from "./Customers/CustomerForm";
 import CustomerList from "./Customers/CustomerList";
 import SalesPeopleList from "./SalesPeople/SalesPeopleList";
 import SalesPeopleForm from "./SalesPeople/SalesPeopleForm";
+import VehicleModelFormFunction from "./Vehicle models/VehicleModelFormFunction";
+import VehicleModelListFunction from "./Vehicle models/VehicleModelListFunction";
+import ManufacturerFormFunction from "./Manufacturers/ManufacturerFormFunction";
+import ManufacturerListFunction from "./Manufacturers/ManufacturerListFunction";
+import AutomobileFormFunction from "./Automobile Inventory/AutomobileFormFunction";
+import AutomobileListFunction from "./Automobile Inventory/AutomobileListFunction";
+import SalesFormFunction from "./Sales/SalesFormFunction";
+import SalesListFunction from "./Sales/SalesListFunction";
 
 function App() {
   return (
@@ -34,20 +34,20 @@ function App() {
             <Route path="new" element={<SalesPeopleForm />} />
           </Route>
           <Route path="manufacturers">
-            <Route path="" element={<ManufacturerList />} />
-            <Route path="new" element={<ManufacturerForm />} />
+            <Route path="" element={<ManufacturerListFunction />} />
+            <Route path="new" element={<ManufacturerFormFunction />} />
           </Route>
           <Route path="vehicle-models">
-            <Route path="" element={<VehicleModelList />} />
-            <Route path="new" element={<VehicleModelForm />} />
+            <Route path="" element={<VehicleModelListFunction />} />
+            <Route path="new" element={<VehicleModelFormFunction />} />
           </Route>
           <Route path="automobiles">
-            <Route path="" element={<AutomobileList />} />
-            <Route path="new" element={<AutomobileForm />} />
+            <Route path="" element={<AutomobileListFunction />} />
+            <Route path="new" element={<AutomobileFormFunction />} />
           </Route>
           <Route path="sales">
-            <Route path="" element={<SalesList />} />
-            <Route path="new" element={<SalesForm />} />
+            <Route path="" element={<SalesListFunction />} />
+            <Route path="new" element={<SalesFormFunction />} />
           </Route>
           <Route path="appointments">
             <Route path="" element={<AppointmentList />} />
