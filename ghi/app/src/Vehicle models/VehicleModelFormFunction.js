@@ -26,7 +26,7 @@ function VehicleModelFormFunction() {
 
   async function submitHandler(e) {
     e.preventDefault();
-    const data = state;
+    const data = { ...state };
     delete data.manufacturers;
 
     const modelUrl = "http://localhost:8100/api/models/";
@@ -40,10 +40,6 @@ function VehicleModelFormFunction() {
 
     const modelResponse = await fetch(modelUrl, fetchConfig);
 
-    if (modelResponse.ok) {
-      const newModel = await modelResponse.json();
-    }
-
     setState((prevState) => {
       return {
         ...prevState,
@@ -52,8 +48,6 @@ function VehicleModelFormFunction() {
         manufacturer_id: "",
       };
     });
-
-    console.log(state);
   }
 
   function inputChangeHandler(e) {
