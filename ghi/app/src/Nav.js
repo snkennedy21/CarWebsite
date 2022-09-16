@@ -50,6 +50,7 @@ function Nav() {
                 <li><Link className="dropdown-item" to="/appointments">Manage appointments</Link></li>
                 <li><Link className="dropdown-item" to="/appointments/history">History</Link></li>
                 <li><Link className="dropdown-item" to="/appointments/new">New appointment</Link></li>
+                <li><Link className="dropdown-item" to="/technicians">Technicians</Link></li>
                 <li><Link className="dropdown-item" to="/technicians/new">New technician</Link></li>
               </ul>
             </div>
