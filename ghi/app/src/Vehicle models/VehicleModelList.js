@@ -18,8 +18,6 @@ function VehicleModelList() {
     fetchResponse();
   }, []);
 
-  console.log(models);
-
   return (
     <React.Fragment>
       <h1>Vehicle Models</h1>
@@ -27,7 +25,7 @@ function VehicleModelList() {
         <div className="row gy-4">
           {models.map((model) => {
             return (
-              <div className="col-xl-3 col-lg-4 col-md-6">
+              <div key={model.id} className="col-xl-3 col-lg-4 col-md-6">
                 <div className="card">
                   <img
                     className="card-img-top"
