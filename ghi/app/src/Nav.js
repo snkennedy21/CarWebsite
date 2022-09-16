@@ -87,7 +87,35 @@ function Nav() {
                 </li>
                 <li>
                   <Link className="dropdown-item" to="/sales/new">
-                    New
+                    New Sale
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className="dropdown-item"
+                    aria-current="page"
+                    to="/sales-people"
+                  >
+                    Sales People
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className="dropdown-item"
+                    aria-current="page"
+                    to="/sales-people/new"
+                  >
+                    Add Sales Person
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/customers">
+                    Customers
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/customers/new">
+                    New Customer
                   </Link>
                 </li>
               </ul>
