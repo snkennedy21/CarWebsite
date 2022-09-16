@@ -45,11 +45,7 @@ function AutomobileForm(props) {
 
   return (
     <React.Fragment>
-      <form
-        className={props.formIsOpen ? "collapse show" : "collapse"}
-        onSubmit={submitHandler}
-        id="create-conference-form"
-      >
+      <form onSubmit={submitHandler} id="create-conference-form">
         <div className="form-floating mb-3">
           <input
             required

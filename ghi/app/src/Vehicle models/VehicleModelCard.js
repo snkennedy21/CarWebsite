@@ -2,9 +2,11 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Card from "../UI/Card";
 import AutomobileForm from "../Automobile Inventory/AutomobileForm";
+import Collapse from "react-bootstrap/Collapse";
 
 function VehicleModelCard(props) {
   const [formIsOpen, setFormIsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   function toggleFormHandler() {
     setFormIsOpen(!formIsOpen);
@@ -22,21 +24,18 @@ function VehicleModelCard(props) {
         <p className="card-text">{props.manufacturer}</p>
       </div>
       <button
+        onClick={() => setOpen(!open)}
+        aria-controls="example-collapse-text"
+        aria-expanded={open}
         className="btn btn-primary"
-        type="button"
-        data-toggle="collapse"
-        data-target="#collapseExample"
-        aria-expanded="false"
-        aria-controls="collapseExample"
-        onClick={toggleFormHandler}
       >
-        Add to Inventory
+        click
       </button>
-      <AutomobileForm
-        toggleForm={toggleFormHandler}
-        formIsOpen={formIsOpen}
-        model_id={props.model_id}
-      />
+      <Collapse in={open}>
+        <div id="example-collapse-text">
+          <AutomobileForm />
+        </div>
+      </Collapse>
     </Card>
   );
 }
