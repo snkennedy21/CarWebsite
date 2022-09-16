@@ -31,7 +31,7 @@ function VehicleModelList() {
               <VehicleModelCard
                 key={model.id}
                 image={model.picture_url}
-                name={model.name}
+                model={model.name}
                 manufacturer={model.manufacturer.name}
               />
             );
