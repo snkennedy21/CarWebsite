@@ -98,8 +98,8 @@ class AppointmentList extends React.Component {
                         {this.state.appointments.filter(appointment => !appointment.finished).map((appointment) => {
                             return (
                                 <tr key={appointment.href}>
-                                    <td className={appointment.is_VIP ? "align-middle text-success font-weight-bold" : "align-middle"}>{appointment.customer.name}</td>
                                     <td className={appointment.is_VIP ? "align-middle text-success font-weight-bold" : "align-middle"}>{appointment.vin}</td>
+                                    <td className={appointment.is_VIP ? "align-middle text-success font-weight-bold" : "align-middle"}>{appointment.customer.name}</td>
                                     <td className={appointment.is_VIP ? "align-middle text-success font-weight-bold" : "align-middle"}>{appointment.date}</td>
                                     <td className={appointment.is_VIP ? "align-middle text-success font-weight-bold" : "align-middle"}>{appointment.time}</td>
                                     <td className={appointment.is_VIP ? "align-middle text-success font-weight-bold" : "align-middle"}>{appointment.technician.name}</td>

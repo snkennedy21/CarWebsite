@@ -1,25 +1,9 @@
-import { NavLink } from "react-router-dom";
 import { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 
 function Nav() {
-  const [isSalesOpen, setIsSalesOpen] = useState(false);
-  const [isServiceOpen, setIsServiceOpen] = useState(false);
-  const [isAutomobilesOpen, setIsAutomobilesOpen] = useState(false);
-
-  function toggleSalesDropdown() {
-    setIsSalesOpen(!isSalesOpen);
-  }
-
-  function toggleServiceDropdown() {
-    setIsServiceOpen(!isServiceOpen);
-  }
-
-  function toggleAutomobilesDropdown() {
-    setIsAutomobilesOpen(!isAutomobilesOpen);
-  }
-
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-success">
+    <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
       <div className="container-fluid">
         <NavLink className="navbar-brand" to="/">
           CarCar
@@ -36,202 +20,143 @@ function Nav() {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li>
-              <div className="dropdown nav-item">
-                <button
-                  className="btn btn-secondary dropdown-toggle"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                  onClick={toggleSalesDropdown}
-                >
-                  Sales
-                </button>
-                <div
-                  className={
-                    isSalesOpen ? "dropdown-menu show" : "dropdown-menu"
-                  }
-                  aria-labelledby="dropdownMenuButton"
-                >
-                  <NavLink
+          <ul className="navbar-nav me-auto">
+            <div className="dropdown mx-1">
+              <button
+                className="btn btn-dark dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Inventory
+              </button>
+              <ul
+                className="dropdown-menu"
+                aria-labelledby="dropdownMenuButton1"
+              >
+                <li>
+                  <Link className="dropdown-item" to="/manufacturers">
+                    Manufacturers
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/manufacturers/new">
+                    New manufacturer
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/vehicle-models">
+                    Models
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/vehicle-models/new">
+                    New model
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/automobiles">
+                    Automobiles
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/automobiles/new">
+                    Add to inventory
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div className="dropdown mx-1">
+              <button
+                className="btn btn-dark dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton2"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Sales
+              </button>
+              <ul
+                className="dropdown-menu"
+                aria-labelledby="dropdownMenuButton2"
+              >
+                <li>
+                  <Link className="dropdown-item" to="/sales">
+                    History
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/sales/new">
+                    New Sale
+                  </Link>
+                </li>
+                <li>
+                  <Link
                     className="dropdown-item"
                     aria-current="page"
                     to="/sales-people"
-                    onClick={toggleSalesDropdown}
                   >
                     Sales People
-                  </NavLink>
-                  <NavLink
+                  </Link>
+                </li>
+                <li>
+                  <Link
                     className="dropdown-item"
                     aria-current="page"
                     to="/sales-people/new"
-                    onClick={toggleSalesDropdown}
                   >
                     Add Sales Person
-                  </NavLink>
-                  <NavLink
-                    className="dropdown-item"
-                    to="/sales"
-                    onClick={toggleSalesDropdown}
-                  >
-                    Sales
-                  </NavLink>
-                  <NavLink
-                    className="dropdown-item"
-                    to="/sales/new"
-                    onClick={toggleSalesDropdown}
-                  >
-                    Create a New Sale
-                  </NavLink>
-                  <NavLink
-                    className="dropdown-item"
-                    to="/customers"
-                    onClick={toggleSalesDropdown}
-                  >
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/customers">
                     Customers
-                  </NavLink>
-                  <NavLink
-                    className="dropdown-item"
-                    to="/customers/new"
-                    onClick={toggleSalesDropdown}
-                  >
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/customers/new">
                     New Customer
-                  </NavLink>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div className="dropdown nav-item">
-                <button
-                  className="btn btn-secondary dropdown-toggle"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                  onClick={toggleServiceDropdown}
-                >
-                  Service
-                </button>
-                <div
-                  className={
-                    isServiceOpen ? "dropdown-menu show" : "dropdown-menu"
-                  }
-                  aria-labelledby="dropdownMenuButton"
-                >
-                  <NavLink
-                    className="dropdown-item"
-                    aria-current="page"
-                    to="/appointments"
-                    onClick={toggleServiceDropdown}
-                  >
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div className="dropdown mx-1">
+              <button
+                className="btn btn-dark dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton3"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Service
+              </button>
+              <ul
+                className="dropdown-menu"
+                aria-labelledby="dropdownMenuButton3"
+              >
+                <li>
+                  <Link className="dropdown-item" to="/appointments">
                     Manage appointments
-                  </NavLink>
-                  <NavLink
-                    className="dropdown-item"
-                    aria-current="page"
-                    to="/appointments/history"
-                    onClick={toggleServiceDropdown}
-                  >
-                    Appointment history
-                  </NavLink>
-                  <NavLink
-                    className="dropdown-item"
-                    aria-current="page"
-                    to="/appointments/new"
-                    onClick={toggleServiceDropdown}
-                  >
-                    Add service appointment
-                  </NavLink>
-
-                  <NavLink
-                    className="dropdown-item"
-                    aria-current="page"
-                    to="/technicians/new"
-                    onClick={toggleServiceDropdown}
-                  >
-                    Add new technician
-                  </NavLink>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div className="dropdown nav-item">
-                <button
-                  className="btn btn-secondary dropdown-toggle"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                  onClick={toggleAutomobilesDropdown}
-                >
-                  Automobiles
-                </button>
-                <div
-                  className={
-                    isAutomobilesOpen ? "dropdown-menu show" : "dropdown-menu"
-                  }
-                  aria-labelledby="dropdownMenuButton"
-                >
-                  <NavLink
-                    className="dropdown-item"
-                    aria-current="page"
-                    to="/manufacturers"
-                    onClick={toggleAutomobilesDropdown}
-                  >
-                    Manufacturers
-                  </NavLink>
-                  <NavLink
-                    className="dropdown-item"
-                    aria-current="page"
-                    to="/manufacturers/new"
-                    onClick={toggleAutomobilesDropdown}
-                  >
-                    Create manufacturer
-                  </NavLink>
-
-                  <NavLink
-                    className="dropdown-item"
-                    aria-current="page"
-                    to="/vehicle-models"
-                    onClick={toggleAutomobilesDropdown}
-                  >
-                    Vehicle models
-                  </NavLink>
-
-                  <NavLink
-                    className="dropdown-item"
-                    aria-current="page"
-                    to="/vehicle-models/new"
-                    onClick={toggleAutomobilesDropdown}
-                  >
-                    Create vehicle model
-                  </NavLink>
-
-                  <NavLink
-                    className="dropdown-item"
-                    aria-current="page"
-                    to="/automobiles"
-                    onClick={toggleAutomobilesDropdown}
-                  >
-                    Inventory
-                  </NavLink>
-
-                  <NavLink
-                    className="dropdown-item"
-                    aria-current="page"
-                    to="/automobiles/new"
-                    onClick={toggleAutomobilesDropdown}
-                  >
-                    Add automobile to inventory
-                  </NavLink>
-                </div>
-              </div>
-            </li>
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/appointments/history">
+                    History
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/appointments/new">
+                    New appointment
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/technicians/new">
+                    New technician
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </ul>
         </div>
       </div>
