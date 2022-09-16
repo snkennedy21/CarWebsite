@@ -54,7 +54,7 @@ class AppointmentHistory extends React.Component {
                     <input onChange={this.handleChange.bind(this)} value={this.state.search} required type="search" placeholder="Enter VIN" name="search" className="form-control"/>
                     <button class="btn btn-outline-success me-2 my-sm-0" type="submit">Search</button>
                 </form>
-                <table className="table my-5 table-striped">
+                <table className="table my-3 table-striped">
                     <thead>
                         <tr>
                             <th>VIN</th>
