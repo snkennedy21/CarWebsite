@@ -62,3 +62,8 @@ microservice, here.
     api_sales_person (GET, POST): Gets a list of salespeople or creates a new salesperson
 
 #### Inventory Integration
+
+    Making the sales microservice work with the inventory microservice and the service microservice required a few steps
+
+    1) the sales microservice was responsible for telling the service microservice which cars had been sold or not. By using the is_sold property in the Automobiles model, we were able to keep track of whether or not a car being serviced would receive VIP treatment.
+    2) A poll was set up to transfer the relevant Automobile information to the sales microservice in order for the sales microservice to have access to which particular car in the inventory was being sold or not.
