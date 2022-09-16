@@ -6,30 +6,12 @@ function AutomobileForm(props) {
     color: "",
     year: "",
     vin: "",
-    model_id: "",
-    models: [],
+    model_id: props.model,
   });
-
-  useEffect(() => {
-    async function fetchData() {
-      const modelUrl = "http://localhost:8100/api/models/";
-
-      const response = await fetch(modelUrl);
-
-      if (response.ok) {
-        const data = await response.json();
-        setState((prevState) => {
-          return { ...prevState, models: data.models };
-        });
-      }
-    }
-    fetchData();
-  }, []);
 
   async function submitHandler(e) {
     e.preventDefault();
     const data = { ...state };
-    delete data.models;
 
     const automobileUrl = "http://localhost:8100/api/automobiles/";
     const fetchConfig = {
@@ -48,7 +30,6 @@ function AutomobileForm(props) {
         color: "",
         year: "",
         vin: "",
-        model_id: "",
       };
     });
   }
@@ -105,25 +86,6 @@ function AutomobileForm(props) {
             value={state.vin}
           />
           <label htmlFor="vin">VIN</label>
-        </div>
-        <div className="mb-3">
-          <select
-            required
-            name="model_id"
-            id="model_id"
-            className="form-select"
-            onChange={inputChangeHandler}
-            value={state.model_id}
-          >
-            <option value="">Choose a Model</option>
-            {state.models.map((model) => {
-              return (
-                <option key={model.id} value={model.id}>
-                  {model.name}
-                </option>
-              );
-            })}
-          </select>
         </div>
         <button className="btn btn-primary">Add</button>
       </form>
