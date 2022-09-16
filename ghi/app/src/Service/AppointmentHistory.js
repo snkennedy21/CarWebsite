@@ -28,6 +28,8 @@ class AppointmentHistory extends React.Component {
                     hours = "12"; // in case some insane person is getting work done between 12a-1a (after setting am/pm)
                 } else if (Number(hours) >= 13) {
                     hours = String(Number(hours)-12); // translate from military time
+                } else {
+                    hours = String(Number(hours));
                 }
                 appointment.time = `${hours}:${mins} ${amOrPm}`;
                 // change customer field to match customer name
