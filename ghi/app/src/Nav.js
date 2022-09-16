@@ -57,68 +57,6 @@ function Nav() {
                 <li><Link className="dropdown-item" to="/technicians/new">New technician</Link></li>
               </ul>
             </div>
-            
-
-
-
-
-            {/* <li className="nav-item">
-              <NavLink className="nav-link" aria-current="page" to="/">
-                Home
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/manufacturers">
-                Manufacturers
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/manufacturers/new">
-                Create manufacturer
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/vehicle-models">
-                Vehicle models
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/vehicle-models/new">
-                Create vehicle model
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/automobiles">
-                Inventory
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/automobiles/new">
-                Add automobile to inventory
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/sales">
-                Sales
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/sales/new">
-                Create a New Sale
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/appointments">Manage appointments</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/appointments/history">Appointment history</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/appointments/new">Add service appointment</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/technicians/new">Add new technician</NavLink>
-            </li> */}
           </ul>
         </div>
       </div>
