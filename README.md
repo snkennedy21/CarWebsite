@@ -47,5 +47,18 @@ microservice, here.
 
 ### Sales microservice
 
-Explain your models and integration with the inventory
-microservice, here.
+#### Models
+
+    The Sales model includes an is_sold property to enable the broswer to distinguish between inventory items that have been sold and inventory items that have not been sold. This ensures that when a vehicle is sold, it no longer shows up in the list of options for cars to be sold.
+
+    AutomobileVO: AutomobileVO model comes from a poll that was set up between the sales microservice and the inventory microservice
+
+#### REST APIs
+
+    api_sales (GET, POST): Gets a list of sales or creates a new sale
+
+    api_customer (GET, POST): Gets a list of customers or creates a new customer
+
+    api_sales_person (GET, POST): Gets a list of salespeople or creates a new salesperson
+
+#### Inventory Integration
