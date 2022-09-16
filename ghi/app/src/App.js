@@ -13,7 +13,7 @@ import VehicleModelForm from "./Vehicle models/VehicleModelForm";
 import VehicleModelList from "./Vehicle models/VehicleModelList";
 import ManufacturerForm from "./Manufacturers/ManufacturerForm";
 import ManufacturerList from "./Manufacturers/ManufacturerList";
-import AutomobileForm from "./Automobile Inventory/AutomobileForm";
+import CreateAutomobile from "./Automobile Inventory/CreateAutomobile";
 import AutomobileList from "./Automobile Inventory/AutomobileList";
 import SalesForm from "./Sales/SalesForm";
 import SalesList from "./Sales/SalesList";
@@ -43,7 +43,7 @@ function App() {
           </Route>
           <Route path="automobiles">
             <Route path="" element={<AutomobileList />} />
-            <Route path="new" element={<AutomobileForm />} />
+            <Route path="new" element={<CreateAutomobile />} />
           </Route>
           <Route path="sales">
             <Route path="" element={<SalesList />} />
