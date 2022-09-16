@@ -6,6 +6,7 @@ class VehicleModelForm extends React.Component {
     this.state = {
       name: "",
       picture_url: "",
+      manufacturer_id: "",
       manufacturers: [],
     };
   }
@@ -43,7 +44,7 @@ class VehicleModelForm extends React.Component {
     const cleared = {
       name: "",
       picture_url: "",
-      manufactuer: "",
+      manufacturer_id: "",
     };
 
     this.setState(cleared);
@@ -55,7 +56,6 @@ class VehicleModelForm extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <div className="row">
         <div className="offset-3 col-6">
@@ -98,7 +98,7 @@ class VehicleModelForm extends React.Component {
                   id="manufacturer_id"
                   className="form-select"
                   onChange={this.inputChangeHandler.bind(this)}
-                  value={this.state.manufactuer}
+                  value={this.state.manufacturer_id}
                 >
                   <option value="">Choose a Manufacturer</option>
                   {this.state.manufacturers.map((manufacturer) => {

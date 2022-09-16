@@ -67,6 +67,8 @@ class CustomersListencoder(ModelEncoder):
   model = Customer
   properties = [
     "name",
+    "address",
+    "phone_number",
     "id",
   ]
 
