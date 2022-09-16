@@ -33,7 +33,7 @@ function AutomobileForm(props) {
       };
     });
 
-    props.closeForm();
+    props.toggleForm();
   }
 
   function inputChangeHandler(e) {

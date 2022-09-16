@@ -6,14 +6,8 @@ import AutomobileForm from "../Automobile Inventory/AutomobileForm";
 function VehicleModelCard(props) {
   const [formIsOpen, setFormIsOpen] = useState(false);
 
-  function closeFormHandler() {
-    setFormIsOpen(false);
-  }
-
-  function addVehicleHandler() {}
-
-  function showFormHandler() {
-    setFormIsOpen(true);
+  function toggleFormHandler() {
+    setFormIsOpen(!formIsOpen);
   }
 
   return (
@@ -34,14 +28,13 @@ function VehicleModelCard(props) {
         data-target="#collapseExample"
         aria-expanded="false"
         aria-controls="collapseExample"
-        onClick={showFormHandler}
+        onClick={toggleFormHandler}
       >
         Add to Inventory
       </button>
       <AutomobileForm
-        closeForm={closeFormHandler}
+        toggleForm={toggleFormHandler}
         formIsOpen={formIsOpen}
-        addVehicle={addVehicleHandler}
         model_id={props.model_id}
       />
     </Card>
