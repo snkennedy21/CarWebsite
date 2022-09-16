@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import React from "react";
+import VehicleModelCard from "./VehicleModelCard";
 
 function VehicleModelList() {
   const [models, setModels] = useState([]);
@@ -18,6 +19,8 @@ function VehicleModelList() {
     fetchResponse();
   }, []);
 
+  console.log(models);
+
   return (
     <React.Fragment>
       <h1>Vehicle Models</h1>
@@ -25,19 +28,12 @@ function VehicleModelList() {
         <div className="row gy-4">
           {models.map((model) => {
             return (
-              <div key={model.id} className="col-xl-3 col-lg-4 col-md-6">
-                <div className="card">
-                  <img
-                    className="card-img-top"
-                    src={model.picture_url}
-                    alt="Card image cap"
-                  ></img>
-                  <div className="card-body">
-                    <h5 className="card-title">{model.name}</h5>
-                    <p className="card-text">{model.manufacturer.name}</p>
-                  </div>
-                </div>
-              </div>
+              <VehicleModelCard
+                key={model.id}
+                image={model.picture_url}
+                name={model.name}
+                manufacturer={model.manufacturer.name}
+              />
             );
           })}
         </div>
