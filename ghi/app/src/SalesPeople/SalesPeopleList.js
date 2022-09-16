@@ -17,6 +17,7 @@ function SalesPeopleList() {
 
   return (
     <div className="my-5 container">
+      <h1>Sales People</h1>
       <div className="d-grid gap-2 d-sm-flex justify-content-sm-center"></div>
       <table className="table my-5 table-striped">
         <thead>
