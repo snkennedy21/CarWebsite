@@ -150,6 +150,11 @@ function Nav() {
                   </Link>
                 </li>
                 <li>
+                  <Link className="dropdown-item" to="/technicians">
+                    Technicians
+                  </Link>
+                </li>
+                <li>
                   <Link className="dropdown-item" to="/technicians/new">
                     New technician
                   </Link>

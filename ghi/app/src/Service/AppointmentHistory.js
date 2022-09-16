@@ -31,11 +31,8 @@ class AppointmentHistory extends React.Component {
                 }
                 appointment.time = `${hours}:${mins} ${amOrPm}`;
                 // change customer field to match customer name
-                console.log(customerData);
-                console.log("appointment.customer", appointment.customer);
                 appointment.customer = customerData.find(customer => customer.id == appointment.customer);
             });
-            console.log(data.appointments);
             this.setState({appointments: data.appointments});
         } else {
             throw new Error("search response not ok");
@@ -52,7 +49,7 @@ class AppointmentHistory extends React.Component {
                 <h1 className="my-2">Service history</h1>
                 <form className="d-flex" onSubmit={this.handleSearch.bind(this)} id="service-history-search">
                     <input onChange={this.handleChange.bind(this)} value={this.state.search} required type="search" placeholder="Enter VIN" name="search" className="form-control"/>
-                    <button class="btn btn-outline-success me-2 my-sm-0" type="submit">Search</button>
+                    <button className="btn btn-outline-success me-2 my-sm-0" type="submit">Search</button>
                 </form>
                 <table className="table my-3 table-striped">
                     <thead>

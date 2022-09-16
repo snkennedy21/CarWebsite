@@ -48,7 +48,6 @@ class AppointmentList extends React.Component {
         const automobilesUrl = "http://localhost:8100/api/automobiles/";
         const automobilesResponse = await fetch(automobilesUrl);
         const automobilesData = await automobilesResponse.json();
-        console.log(automobilesData);
         const customerResponse = await fetch(customersUrl);
         const customerData = await customerResponse.json();
         const response = await fetch(appointmentsUrl);
