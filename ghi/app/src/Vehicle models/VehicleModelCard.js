@@ -29,7 +29,7 @@ function VehicleModelCard(props) {
         aria-expanded={open}
         className="btn btn-primary"
       >
-        click
+        Add to Inventory
       </button>
       <Collapse in={open}>
         <div id="example-collapse-text">
