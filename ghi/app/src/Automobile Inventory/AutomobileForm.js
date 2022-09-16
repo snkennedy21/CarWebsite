@@ -6,7 +6,7 @@ function AutomobileForm(props) {
     color: "",
     year: "",
     vin: "",
-    model_id: props.model,
+    model_id: props.model_id,
   });
 
   async function submitHandler(e) {
@@ -32,6 +32,8 @@ function AutomobileForm(props) {
         vin: "",
       };
     });
+
+    props.closeForm();
   }
 
   function inputChangeHandler(e) {

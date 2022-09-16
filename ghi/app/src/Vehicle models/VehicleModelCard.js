@@ -6,7 +6,9 @@ import AutomobileForm from "../Automobile Inventory/AutomobileForm";
 function VehicleModelCard(props) {
   const [formIsOpen, setFormIsOpen] = useState(false);
 
-  function closeFormHandler() {}
+  function closeFormHandler() {
+    setFormIsOpen(false);
+  }
 
   function addVehicleHandler() {}
 
@@ -40,7 +42,7 @@ function VehicleModelCard(props) {
         closeForm={closeFormHandler}
         formIsOpen={formIsOpen}
         addVehicle={addVehicleHandler}
-        model={props.model}
+        model_id={props.model_id}
       />
     </Card>
   );

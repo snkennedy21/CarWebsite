@@ -33,6 +33,7 @@ function VehicleModelList() {
                 image={model.picture_url}
                 model={model.name}
                 manufacturer={model.manufacturer.name}
+                model_id={model.id}
               />
             );
           })}
