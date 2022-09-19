@@ -1,16 +1,11 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Card from "../UI/Card";
 import AutomobileForm from "../Automobile Inventory/AutomobileForm";
 import Collapse from "react-bootstrap/Collapse";
 
 function VehicleModelCard(props) {
-  const [formIsOpen, setFormIsOpen] = useState(false);
   const [open, setOpen] = useState(false);
-
-  function toggleFormHandler() {
-    setFormIsOpen(!formIsOpen);
-  }
 
   return (
     <Card>
@@ -33,7 +28,7 @@ function VehicleModelCard(props) {
       </button>
       <Collapse in={open}>
         <div id="example-collapse-text">
-          <AutomobileForm />
+          <AutomobileForm model_id={props.model_id} />
         </div>
       </Collapse>
     </Card>

@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-function VehicleModelForm() {
+function VehicleModelForm(props) {
   const [state, setState] = useState({
     name: "",
     picture_url: "",
@@ -39,6 +39,11 @@ function VehicleModelForm() {
     };
 
     const modelResponse = await fetch(modelUrl, fetchConfig);
+
+    if (modelResponse.ok) {
+      const newVehicleModel = await modelResponse.json();
+      props.updateVehicleModelList(newVehicleModel);
+    }
 
     setState((prevState) => {
       return {

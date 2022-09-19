@@ -1,7 +1,7 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-const ManufacturerForm = function () {
+const ManufacturerForm = function (props) {
   const [name, setName] = useState("");
 
   async function submitHandler(e) {
@@ -19,6 +19,7 @@ const ManufacturerForm = function () {
 
     if (manufacturerResponse.ok) {
       const newManufacturer = await manufacturerResponse.json();
+      props.updateManufactuersList(newManufacturer);
       setName("");
     }
   }
