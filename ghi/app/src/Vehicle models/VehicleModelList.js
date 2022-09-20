@@ -1,53 +1,37 @@
+import { useState, useEffect } from "react";
 import React from "react";
+import VehicleModelCard from "./VehicleModelCard";
+import VehicleModelForm from "./VehicleModelForm";
+import Collapse from "react-bootstrap/Collapse";
 
-class VehicleModelList extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      models: [],
-    };
-  }
+function VehicleModelList(props) {
+  const [formIsOpen, setFormIsOpen] = useState(false);
 
-  async componentDidMount() {
-    const modelUrl = "http://localhost:8100/api/models/";
-    const response = await fetch(modelUrl);
-
-    if (response.ok) {
-      const data = await response.json();
-      this.setState({ models: data.models });
-    }
-  }
-
-  render() {
-    console.log(this.state.models);
-    return (
-      <React.Fragment>
-        <h1>Vehicle Models</h1>
-        <table className="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Manufacturer</th>
-              <th scope="col">Picture</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.models.map((model) => {
-              return (
-                <tr key={model.id}>
-                  <td>{model.name}</td>
-                  <td>{model.manufacturer.name}</td>
-                  <td>
-                    <img src={model.picture_url} />
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </React.Fragment>
-    );
-  }
+  return (
+    <React.Fragment>
+      <div className="my-5 container">
+        <div className="justify-content-sm-center">
+          <h1>Vehicle Models</h1>
+          <div className="container">
+            <div className="row gy-4">
+              {props.vehicleModels.map((model) => {
+                return (
+                  <VehicleModelCard
+                    key={model.id}
+                    image={model.picture_url}
+                    model={model.name}
+                    manufacturer={model.manufacturer.name}
+                    model_id={model.id}
+                    updateAutomobilesList={props.updateAutomobilesList}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
+    </React.Fragment>
+  );
 }
 
 export default VehicleModelList;

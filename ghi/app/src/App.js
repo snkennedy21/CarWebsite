@@ -1,23 +1,23 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainPage from "./MainPage";
 import Nav from "./Nav";
-import VehicleModelForm from "./Vehicle models/VehicleModelForm";
-import VehicleModelList from "./Vehicle models/VehicleModelList";
-import ManufacturerForm from "./Manufacturers/ManufacturerForm";
-import ManufacturerList from "./Manufacturers/ManufacturerList";
-import AutomobileForm from "./Automobile Inventory/AutomobileForm";
-import AutomobileList from "./Automobile Inventory/AutomobileList";
 import AppointmentForm from "./Service/AppointmentForm";
 import AppointmentList from "./Service/AppointmentList";
 import AppointmentHistory from "./Service/AppointmentHistory";
 import TechnicianForm from "./Service/TechnicianForm";
 import TechnicianList from "./Service/TechnicianList";
-import SalesForm from "./Sales/SalesForm";
-import SalesList from "./Sales/SalesList";
 import CustomerForm from "./Customers/CustomerForm";
 import CustomerList from "./Customers/CustomerList";
 import SalesPeopleList from "./SalesPeople/SalesPeopleList";
 import SalesPeopleForm from "./SalesPeople/SalesPeopleForm";
+import VehicleModelForm from "./Vehicle models/VehicleModelForm";
+import VehicleModelList from "./Vehicle models/VehicleModelList";
+import ManufacturerForm from "./Manufacturers/ManufacturerForm";
+import ManufacturerList from "./Manufacturers/ManufacturerList";
+import CreateAutomobile from "./Automobile Inventory/CreateAutomobile";
+import AutomobileList from "./Automobile Inventory/AutomobileList";
+import SalesForm from "./Sales/SalesForm";
+import SalesList from "./Sales/SalesList";
 
 function App() {
   return (
@@ -44,7 +44,7 @@ function App() {
           </Route>
           <Route path="automobiles">
             <Route path="" element={<AutomobileList />} />
-            <Route path="new" element={<AutomobileForm />} />
+            <Route path="new" element={<CreateAutomobile />} />
           </Route>
           <Route path="sales">
             <Route path="" element={<SalesList />} />

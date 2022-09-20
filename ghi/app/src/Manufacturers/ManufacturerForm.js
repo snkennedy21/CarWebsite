@@ -1,16 +1,15 @@
 import React from "react";
+import { useState } from "react";
 
-class ManufacturerForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: "",
-    };
-  }
+const ManufacturerForm = function (props) {
+  const [state, setState] = useState({
+    name: "",
+    picture_url: "",
+  });
 
-  async handleSubmit(e) {
+  async function submitHandler(e) {
     e.preventDefault();
-    const data = { ...this.state };
+    const data = { ...state };
     const manufacturerUrl = "http://localhost:8100/api/manufacturers/";
     const fetchConfig = {
       method: "post",
@@ -19,54 +18,68 @@ class ManufacturerForm extends React.Component {
         "Content-Type": "application/json",
       },
     };
-    const response = await fetch(manufacturerUrl, fetchConfig);
+    const manufacturerResponse = await fetch(manufacturerUrl, fetchConfig);
 
-    if (response.ok) {
-      const newManufacturer = await response.json();
-      console.log("new manufacturer created:", newManufacturer);
-      this.setState({ name: "" });
-    } else {
-      throw new Error("response not ok");
+    if (manufacturerResponse.ok) {
+      const newManufacturer = await manufacturerResponse.json();
+      props.updateManufacturersList(newManufacturer);
+      setState((prevState) => {
+        return {
+          ...prevState,
+          name: "",
+          picture_url: "",
+        };
+      });
     }
   }
 
-  handleChangeManufacturerName(e) {
+  function inputChangeHandler(e) {
     const value = e.target.value;
-    this.setState({ name: value });
+    setState((prevState) => {
+      return { ...prevState, [e.target.name]: value };
+    });
   }
 
-  render() {
-    return (
-      <div className="container mb-4">
-        <div className="row">
-          <div className="offset-3 col-6">
-            <div className="shadow p-4 mt-4">
-              <h1>Create a manufacturer</h1>
-              <form
-                onSubmit={this.handleSubmit.bind(this)}
-                id="create-manufacturer-form"
-              >
-                <div className="form-floating mb-3">
-                  <input
-                    onChange={this.handleChangeManufacturerName.bind(this)}
-                    value={this.state.name}
-                    placeholder="ManufacturerName"
-                    required
-                    type="text"
-                    name="name"
-                    id="name"
-                    className="form-control"
-                  />
-                  <label htmlFor="name">Manufacturer name</label>
-                </div>
-                <button className="btn btn-primary">Create</button>
-              </form>
-            </div>
+  return (
+    <div className="container mb-4">
+      <div className="row">
+        <div className="offset-3 col-6">
+          <div className="shadow p-4 mt-4">
+            <h1>Create a manufacturer</h1>
+            <form onSubmit={submitHandler} id="create-manufacturer-form">
+              <div className="form-floating mb-3">
+                <input
+                  onChange={inputChangeHandler}
+                  placeholder="ManufacturerName"
+                  required
+                  type="text"
+                  name="name"
+                  id="name"
+                  className="form-control"
+                  value={state.name}
+                />
+                <label htmlFor="name">Manufacturer name</label>
+              </div>
+              <div className="form-floating mb-3">
+                <input
+                  onChange={inputChangeHandler}
+                  placeholder="Picture Url"
+                  required
+                  type="text"
+                  name="picture_url"
+                  id="picture_url"
+                  className="form-control"
+                  value={state.picture_url}
+                />
+                <label htmlFor="picture_url">Picture Url</label>
+              </div>
+              <button className="btn btn-primary">Create</button>
+            </form>
           </div>
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default ManufacturerForm;

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 
 function Nav() {
@@ -40,28 +41,13 @@ function Nav() {
                   </Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item" to="/manufacturers/new">
-                    New manufacturer
-                  </Link>
-                </li>
-                <li>
                   <Link className="dropdown-item" to="/vehicle-models">
                     Models
                   </Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item" to="/vehicle-models/new">
-                    New model
-                  </Link>
-                </li>
-                <li>
                   <Link className="dropdown-item" to="/automobiles">
                     Automobiles
-                  </Link>
-                </li>
-                <li>
-                  <Link className="dropdown-item" to="/automobiles/new">
-                    Add to inventory
                   </Link>
                 </li>
               </ul>
