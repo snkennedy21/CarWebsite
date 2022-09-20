@@ -12,7 +12,9 @@ function ManufacturerList() {
   const [vehicleModels, setVehicleModels] = useState([]);
   const [automobiles, setAutomobiles] = useState([]);
 
-  const [open, setOpen] = useState(false);
+  const [manufacturerFormOpen, setManufacturerFormOpen] = useState(false);
+  const [vehicleModelFormOpen, setVehicleModelFormOpen] = useState(false);
+  const [automobileFormOpen, setAutomobileFormOpen] = useState(false);
 
   const [selectedManufacturer, setSelectedManufacturer] = useState("");
   const [selectedVehicleModel, setSelectedVehicleModel] = useState("");
@@ -75,14 +77,44 @@ function ManufacturerList() {
     });
   }
 
+  function openManufacturerFormHandler() {
+    setManufacturerFormOpen(true);
+    setVehicleModelFormOpen(false);
+    setAutomobileFormOpen(false);
+  }
+
+  function openVehicleModelFormHandler() {
+    setManufacturerFormOpen(false);
+    setVehicleModelFormOpen(true);
+    setAutomobileFormOpen(false);
+  }
+
+  function openAutomobileFormHandler() {
+    setManufacturerFormOpen(false);
+    setVehicleModelFormOpen(false);
+    setAutomobileFormOpen(true);
+  }
+
   return (
     <React.Fragment>
       <div className="my-5 container">
+        <button
+          type="button"
+          className="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          onClick={openManufacturerFormHandler}
+        >
+          Launch demo modal
+        </button>
         <FormModal
           vehicleModels={vehicleModels}
           manufacturers={manufacturers}
           selectedManufacturer={selectedManufacturer}
           updateVehicleModelList={updateVehicleModelListHandler}
+          manufacturerFormOpen={manufacturerFormOpen}
+          vehicleModelFormOpen={vehicleModelFormOpen}
+          automobileFormOpen={automobileFormOpen}
         />
 
         <h1>Manufacturers</h1>
@@ -96,6 +128,7 @@ function ManufacturerList() {
                   image={manufacturer.picture_url}
                   updateVehicleModelList={updateVehicleModelListHandler}
                   updateSelectedManufacturer={updateSelectedManufacturerHandler}
+                  openVehicleModelForm={openVehicleModelFormHandler}
                 />
               );
             })}

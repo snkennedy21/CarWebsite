@@ -11,6 +11,7 @@ function VehicleModelForm(props) {
   async function submitHandler(e) {
     e.preventDefault();
     const data = { ...state };
+    console.log(data);
     delete data.manufacturers;
 
     const modelUrl = "http://localhost:8100/api/models/";
@@ -34,7 +35,6 @@ function VehicleModelForm(props) {
         ...prevState,
         name: "",
         picture_url: "",
-        manufacturer_id: "",
       };
     });
   }

@@ -1,18 +1,31 @@
 import React from "react";
 import VehicleModelForm from "../Vehicle models/VehicleModelForm";
+import ManufacturerForm from "../Manufacturers/ManufacturerForm";
 
 function FormModal(props) {
+  let form;
+  if (props.manufacturerFormOpen) {
+    form = (
+      <ManufacturerForm updateVehicleModelList={props.updateVehicleModelList} />
+    );
+  } else if (props.vehicleModelFormOpen) {
+    form = props.manufacturers
+      .filter((manufacturer) => {
+        return manufacturer.id == props.selectedManufacturer;
+      })
+      .map((manufacturer) => {
+        return (
+          <VehicleModelForm
+            key={manufacturer.id}
+            manufacturer_id={manufacturer.id}
+            updateVehicleModelList={props.updateVehicleModelList}
+          />
+        );
+      });
+  }
+
   return (
     <React.Fragment>
-      <button
-        type="button"
-        className="btn btn-primary"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
-      >
-        Launch demo modal
-      </button>
-
       <div
         className="modal fade"
         id="exampleModal"
@@ -33,21 +46,7 @@ function FormModal(props) {
                 aria-label="Close"
               ></button>
             </div>
-            <div className="modal-body">
-              {props.manufacturers
-                .filter((manufacturer) => {
-                  return manufacturer.id == props.selectedManufacturer;
-                })
-                .map((manufacturer) => {
-                  return (
-                    <VehicleModelForm
-                      key={manufacturer.id}
-                      manufacturer_id={manufacturer.id}
-                      updateVehicleModelList={props.updateVehicleModelList}
-                    />
-                  );
-                })}
-            </div>
+            <div className="modal-body">{form}</div>
           </div>
         </div>
       </div>

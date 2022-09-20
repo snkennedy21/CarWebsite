@@ -7,6 +7,7 @@ import VehicleModelForm from "../Vehicle models/VehicleModelForm";
 function ManufacturerCard(props) {
   function updateManufacturer(e) {
     props.updateSelectedManufacturer(e.target.value);
+    props.openVehicleModelForm();
   }
 
   const [open, setOpen] = useState(false);
