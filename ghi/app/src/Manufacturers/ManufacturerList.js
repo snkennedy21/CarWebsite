@@ -112,6 +112,7 @@ function ManufacturerList() {
           manufacturers={manufacturers}
           selectedManufacturer={selectedManufacturer}
           updateVehicleModelList={updateVehicleModelListHandler}
+          updateManufacturersList={updateManufacturersListHandler}
           manufacturerFormOpen={manufacturerFormOpen}
           vehicleModelFormOpen={vehicleModelFormOpen}
           automobileFormOpen={automobileFormOpen}

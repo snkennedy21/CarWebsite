@@ -6,7 +6,9 @@ function FormModal(props) {
   let form;
   if (props.manufacturerFormOpen) {
     form = (
-      <ManufacturerForm updateVehicleModelList={props.updateVehicleModelList} />
+      <ManufacturerForm
+        updateManufacturersList={props.updateManufacturersList}
+      />
     );
   } else if (props.vehicleModelFormOpen) {
     form = props.manufacturers
