@@ -5,6 +5,7 @@ import ManufacturerForm from "./ManufacturerForm";
 import Collapse from "react-bootstrap/Collapse";
 import VehicleModelList from "../Vehicle models/VehicleModelList";
 import AutomobileList from "../Automobile Inventory/AutomobileList";
+import FormModal from "../UI/FormModal";
 
 function ManufacturerList() {
   const [manufacturers, setManufacturers] = useState([]);
@@ -12,6 +13,10 @@ function ManufacturerList() {
   const [automobiles, setAutomobiles] = useState([]);
 
   const [open, setOpen] = useState(false);
+
+  const [selectedManufacturer, setSelectedManufacturer] = useState("");
+  const [selectedVehicleModel, setSelectedVehicleModel] = useState("");
+  const [selectedAutomobile, setSelectedAutomobile] = useState("");
 
   const fetchManufacturerData = async () => {
     const manufacturersUrl = "http://localhost:8100/api/manufacturers/";
@@ -48,6 +53,10 @@ function ManufacturerList() {
     fetchAutomobileData();
   }, []);
 
+  function updateSelectedManufacturerHandler(manufacturer) {
+    setSelectedManufacturer(manufacturer);
+  }
+
   function updateManufacturersListHandler(manufacturerData) {
     setManufacturers((prevState) => {
       return [...prevState, manufacturerData];
@@ -69,23 +78,12 @@ function ManufacturerList() {
   return (
     <React.Fragment>
       <div className="my-5 container">
-        <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-          <button
-            onClick={() => setOpen(!open)}
-            aria-controls="example-collapse-text"
-            aria-expanded={open}
-            className="btn btn-primary"
-          >
-            Add Manufacturer
-          </button>
-        </div>
-        <Collapse in={open}>
-          <div id="example-collapse-text">
-            <ManufacturerForm
-              updateManufacturersList={updateManufacturersListHandler}
-            />
-          </div>
-        </Collapse>
+        <FormModal
+          vehicleModels={vehicleModels}
+          manufacturers={manufacturers}
+          selectedManufacturer={selectedManufacturer}
+          updateVehicleModelList={updateVehicleModelListHandler}
+        />
 
         <h1>Manufacturers</h1>
         <div className="container">
@@ -97,6 +95,7 @@ function ManufacturerList() {
                   manufacturer_id={manufacturer.id}
                   image={manufacturer.picture_url}
                   updateVehicleModelList={updateVehicleModelListHandler}
+                  updateSelectedManufacturer={updateSelectedManufacturerHandler}
                 />
               );
             })}

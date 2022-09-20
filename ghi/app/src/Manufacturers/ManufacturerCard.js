@@ -5,8 +5,11 @@ import Collapse from "react-bootstrap/Collapse";
 import VehicleModelForm from "../Vehicle models/VehicleModelForm";
 
 function ManufacturerCard(props) {
-  const [open, setOpen] = useState(false);
+  function updateManufacturer(e) {
+    props.updateSelectedManufacturer(e.target.value);
+  }
 
+  const [open, setOpen] = useState(false);
   return (
     <Card>
       <img
@@ -18,21 +21,15 @@ function ManufacturerCard(props) {
         <h5 className="card-title">{props.manufacturer}</h5>
       </div>
       <button
-        onClick={() => setOpen(!open)}
-        aria-controls="example-collapse-text"
-        aria-expanded={open}
+        type="button"
         className="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+        value={props.manufacturer_id}
+        onClick={updateManufacturer}
       >
-        Add a Vehicle Model
+        Launch demo modal
       </button>
-      <Collapse in={open}>
-        <div id="example-collapse-text">
-          <VehicleModelForm
-            manufacturer_id={props.manufacturer_id}
-            updateVehicleModelList={props.updateVehicleModelList}
-          />
-        </div>
-      </Collapse>
     </Card>
   );
 }
