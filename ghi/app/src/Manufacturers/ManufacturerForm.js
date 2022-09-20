@@ -2,11 +2,14 @@ import React from "react";
 import { useState } from "react";
 
 const ManufacturerForm = function (props) {
-  const [name, setName] = useState("");
+  const [state, setState] = useState({
+    name: "",
+    picture_url: "",
+  });
 
   async function submitHandler(e) {
     e.preventDefault();
-    const data = { name };
+    const data = { ...state };
     const manufacturerUrl = "http://localhost:8100/api/manufacturers/";
     const fetchConfig = {
       method: "post",
@@ -20,13 +23,21 @@ const ManufacturerForm = function (props) {
     if (manufacturerResponse.ok) {
       const newManufacturer = await manufacturerResponse.json();
       props.updateManufactuersList(newManufacturer);
-      setName("");
+      setState((prevState) => {
+        return {
+          ...prevState,
+          name: "",
+          picture_url: "",
+        };
+      });
     }
   }
 
-  async function inputChangeHandler(e) {
+  function inputChangeHandler(e) {
     const value = e.target.value;
-    setName(value);
+    setState((prevState) => {
+      return { ...prevState, [e.target.name]: value };
+    });
   }
 
   return (
@@ -45,9 +56,22 @@ const ManufacturerForm = function (props) {
                   name="name"
                   id="name"
                   className="form-control"
-                  value={name}
+                  value={state.name}
                 />
                 <label htmlFor="name">Manufacturer name</label>
+              </div>
+              <div className="form-floating mb-3">
+                <input
+                  onChange={inputChangeHandler}
+                  placeholder="Picture Url"
+                  required
+                  type="text"
+                  name="picture_url"
+                  id="picture_url"
+                  className="form-control"
+                  value={state.picture_url}
+                />
+                <label htmlFor="picture_url">Picture Url</label>
               </div>
               <button className="btn btn-primary">Create</button>
             </form>

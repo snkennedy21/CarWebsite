@@ -28,8 +28,6 @@ function VehicleModelList() {
     fetchResponse();
   }, []);
 
-  console.log(models);
-
   return (
     <React.Fragment>
       <div className="my-5 container">

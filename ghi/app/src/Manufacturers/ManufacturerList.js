@@ -1,18 +1,18 @@
-import React from "react";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import ManufacturerCard from "./ManufacturerCard";
 import ManufacturerForm from "./ManufacturerForm";
 import Collapse from "react-bootstrap/Collapse";
 
 function ManufacturerList() {
-  const [open, setOpen] = useState(false);
   const [manufacturers, setManufacturers] = useState([]);
+  const [open, setOpen] = useState(false);
 
   const fetchResponse = async () => {
-    const url = "http://localhost:8100/api/manufacturers/";
-    const response = await fetch(url);
-    if (response.ok) {
-      const data = await response.json();
+    const manufacturersUrl = "http://localhost:8100/api/manufacturers/";
+    const manufacturerResponse = await fetch(manufacturersUrl);
+    if (manufacturerResponse.ok) {
+      const data = await manufacturerResponse.json();
       setManufacturers(data.manufacturers);
     }
   };
@@ -45,22 +45,21 @@ function ManufacturerList() {
             <ManufacturerForm updateManufactuersList={updateManufactuersList} />
           </div>
         </Collapse>
-        <table className="table my-5 table-striped">
-          <thead>
-            <tr>
-              <th>Name</th>
-            </tr>
-          </thead>
-          <tbody>
+
+        <h1>Vehicle Models</h1>
+        <div className="container">
+          <div className="row gy-4">
             {manufacturers.map((manufacturer) => {
               return (
-                <tr key={manufacturer.href}>
-                  <td>{manufacturer.name}</td>
-                </tr>
+                <ManufacturerCard
+                  key={manufacturer.id}
+                  manufacturer_id={manufacturer.id}
+                  image={manufacturer.picture_url}
+                />
               );
             })}
-          </tbody>
-        </table>
+          </div>
+        </div>
       </div>
     </React.Fragment>
   );
