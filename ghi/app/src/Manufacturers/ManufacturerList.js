@@ -87,7 +87,7 @@ function ManufacturerList() {
           </div>
         </Collapse>
 
-        <h1>Vehicle Models</h1>
+        <h1>Manufacturers</h1>
         <div className="container">
           <div className="row gy-4">
             {manufacturers.map((manufacturer) => {

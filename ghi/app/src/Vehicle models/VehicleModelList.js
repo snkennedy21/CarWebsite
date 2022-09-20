@@ -11,16 +11,6 @@ function VehicleModelList(props) {
     <React.Fragment>
       <div className="my-5 container">
         <div className="justify-content-sm-center">
-          <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <button
-              onClick={() => setFormIsOpen(!formIsOpen)}
-              aria-controls="example-collapse-text"
-              aria-expanded={formIsOpen}
-              className="btn btn-primary"
-            >
-              Add Vehicle Model
-            </button>
-          </div>
           <h1>Vehicle Models</h1>
           <div className="container">
             <div className="row gy-4">
