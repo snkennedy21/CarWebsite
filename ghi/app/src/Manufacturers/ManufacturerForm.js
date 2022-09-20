@@ -22,7 +22,7 @@ const ManufacturerForm = function (props) {
 
     if (manufacturerResponse.ok) {
       const newManufacturer = await manufacturerResponse.json();
-      props.updateManufactuersList(newManufacturer);
+      props.updateManufacturersList(newManufacturer);
       setState((prevState) => {
         return {
           ...prevState,

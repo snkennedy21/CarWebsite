@@ -28,7 +28,10 @@ function VehicleModelCard(props) {
       </button>
       <Collapse in={open}>
         <div id="example-collapse-text">
-          <AutomobileForm model_id={props.model_id} />
+          <AutomobileForm
+            model_id={props.model_id}
+            updateAutomobilesList={props.updateAutomobilesList}
+          />
         </div>
       </Collapse>
     </Card>

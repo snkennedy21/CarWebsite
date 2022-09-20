@@ -2,22 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-function AutomobileList() {
-  const [automobiles, setAutomobiles] = useState([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      const automobilessUrl = "http://localhost:8100/api/automobiles/";
-      const automobilesResponse = await fetch(automobilessUrl);
-
-      if (automobilesResponse.ok) {
-        const automobilesData = await automobilesResponse.json();
-        setAutomobiles(automobilesData.autos);
-      }
-    }
-    fetchData();
-  }, []);
-
+function AutomobileList(props) {
   return (
     <div className="my-5 container">
       <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
@@ -38,7 +23,7 @@ function AutomobileList() {
           </tr>
         </thead>
         <tbody>
-          {automobiles
+          {props.automobiles
             .filter((auto) => {
               return auto.is_sold === false;
             })

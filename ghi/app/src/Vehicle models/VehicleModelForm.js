@@ -26,6 +26,7 @@ function VehicleModelForm(props) {
 
     if (modelResponse.ok) {
       const newVehicleModel = await modelResponse.json();
+      props.updateVehicleModelList(newVehicleModel);
     }
 
     setState((prevState) => {

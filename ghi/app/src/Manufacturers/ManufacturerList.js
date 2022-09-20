@@ -3,12 +3,17 @@ import React from "react";
 import ManufacturerCard from "./ManufacturerCard";
 import ManufacturerForm from "./ManufacturerForm";
 import Collapse from "react-bootstrap/Collapse";
+import VehicleModelList from "../Vehicle models/VehicleModelList";
+import AutomobileList from "../Automobile Inventory/AutomobileList";
 
 function ManufacturerList() {
   const [manufacturers, setManufacturers] = useState([]);
+  const [vehicleModels, setVehicleModels] = useState([]);
+  const [automobiles, setAutomobiles] = useState([]);
+
   const [open, setOpen] = useState(false);
 
-  const fetchResponse = async () => {
+  const fetchManufacturerData = async () => {
     const manufacturersUrl = "http://localhost:8100/api/manufacturers/";
     const manufacturerResponse = await fetch(manufacturersUrl);
     if (manufacturerResponse.ok) {
@@ -17,15 +22,49 @@ function ManufacturerList() {
     }
   };
 
-  function updateManufactuersList(manufacturerData) {
+  async function fetchVehicleModelData() {
+    const vehicleModelsUrl = "http://localhost:8100/api/models/";
+    const vehicleModelsResponse = await fetch(vehicleModelsUrl);
+
+    if (vehicleModelsResponse.ok) {
+      const vehicleModelsData = await vehicleModelsResponse.json();
+      setVehicleModels(vehicleModelsData.models);
+    }
+  }
+
+  async function fetchAutomobileData() {
+    const automobilessUrl = "http://localhost:8100/api/automobiles/";
+    const automobilesResponse = await fetch(automobilessUrl);
+
+    if (automobilesResponse.ok) {
+      const automobilesData = await automobilesResponse.json();
+      setAutomobiles(automobilesData.autos);
+    }
+  }
+
+  useEffect(() => {
+    fetchManufacturerData();
+    fetchVehicleModelData();
+    fetchAutomobileData();
+  }, []);
+
+  function updateManufacturersListHandler(manufacturerData) {
     setManufacturers((prevState) => {
       return [...prevState, manufacturerData];
     });
   }
 
-  useEffect(() => {
-    fetchResponse();
-  }, []);
+  function updateVehicleModelListHandler(newVehicleModel) {
+    setVehicleModels((prevState) => {
+      return [...prevState, newVehicleModel];
+    });
+  }
+
+  function updateAutomobilesListHandler(newAutomobile) {
+    setAutomobiles((prevState) => {
+      return [...prevState, newAutomobile];
+    });
+  }
 
   return (
     <React.Fragment>
@@ -42,7 +81,9 @@ function ManufacturerList() {
         </div>
         <Collapse in={open}>
           <div id="example-collapse-text">
-            <ManufacturerForm updateManufactuersList={updateManufactuersList} />
+            <ManufacturerForm
+              updateManufacturersList={updateManufacturersListHandler}
+            />
           </div>
         </Collapse>
 
@@ -55,12 +96,18 @@ function ManufacturerList() {
                   key={manufacturer.id}
                   manufacturer_id={manufacturer.id}
                   image={manufacturer.picture_url}
+                  updateVehicleModelList={updateVehicleModelListHandler}
                 />
               );
             })}
           </div>
         </div>
       </div>
+      <VehicleModelList
+        vehicleModels={vehicleModels}
+        updateAutomobilesList={updateAutomobilesListHandler}
+      />
+      <AutomobileList automobiles={automobiles} />
     </React.Fragment>
   );
 }

@@ -27,7 +27,10 @@ function ManufacturerCard(props) {
       </button>
       <Collapse in={open}>
         <div id="example-collapse-text">
-          <VehicleModelForm manufacturer_id={props.manufacturer_id} />
+          <VehicleModelForm
+            manufacturer_id={props.manufacturer_id}
+            updateVehicleModelList={props.updateVehicleModelList}
+          />
         </div>
       </Collapse>
     </Card>

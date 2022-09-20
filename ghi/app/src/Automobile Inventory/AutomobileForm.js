@@ -24,6 +24,11 @@ function AutomobileForm(props) {
 
     const response = await fetch(automobileUrl, fetchConfig);
 
+    if (response.ok) {
+      const newAutomobile = await response.json();
+      props.updateAutomobilesList(newAutomobile);
+    }
+
     setState((prevState) => {
       return {
         ...prevState,
