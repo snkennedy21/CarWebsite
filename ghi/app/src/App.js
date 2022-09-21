@@ -10,12 +10,9 @@ import CustomerForm from "./Customers/CustomerForm";
 import CustomerList from "./Customers/CustomerList";
 import SalesPeopleList from "./SalesPeople/SalesPeopleList";
 import SalesPeopleForm from "./SalesPeople/SalesPeopleForm";
-import VehicleModelForm from "./Vehicle models/VehicleModelForm";
-import VehicleModelList from "./Vehicle models/VehicleModelList";
-import ManufacturerForm from "./Manufacturers/ManufacturerForm";
-import ManufacturerList from "./Manufacturers/ManufacturerList";
-import CreateAutomobile from "./Automobile Inventory/CreateAutomobile";
-import AutomobileList from "./Automobile Inventory/AutomobileList";
+import VehicleModelList from "./InventoryMicroservice/Vehicle models/VehicleModelList";
+import ManufacturerList from "./InventoryMicroservice/Manufacturers/ManufacturerList";
+import AutomobileList from "./InventoryMicroservice/Automobile Inventory/AutomobileList";
 import SalesForm from "./Sales/SalesForm";
 import SalesList from "./Sales/SalesList";
 
@@ -26,26 +23,24 @@ function App() {
       <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} />
+
+          {/**************************/}
+          {/* INVENTORY MICROSERVICE */}
+          {/**************************/}
+          <Route path="manufacturers" element={<ManufacturerList />} />
+          <Route path="vehicle-models" element={<VehicleModelList />} />
+          <Route path="automobiles" element={<AutomobileList />} />
+
           <Route path="customers">
             <Route path="" element={<CustomerList />} />
             <Route path="new" element={<CustomerForm />} />
           </Route>
+
           <Route path="sales-people">
             <Route path="" element={<SalesPeopleList />} />
             <Route path="new" element={<SalesPeopleForm />} />
           </Route>
-          <Route path="manufacturers">
-            <Route path="" element={<ManufacturerList />} />
-            <Route path="new" element={<ManufacturerForm />} />
-          </Route>
-          <Route path="vehicle-models">
-            <Route path="" element={<VehicleModelList />} />
-            <Route path="new" element={<VehicleModelForm />} />
-          </Route>
-          <Route path="automobiles">
-            <Route path="" element={<AutomobileList />} />
-            <Route path="new" element={<CreateAutomobile />} />
-          </Route>
+
           <Route path="sales">
             <Route path="" element={<SalesList />} />
             <Route path="new" element={<SalesForm />} />

@@ -1,8 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import Card from "../UI/Card";
+import Card from "../../UI/Card";
 import AutomobileForm from "../Automobile Inventory/AutomobileForm";
-import Collapse from "react-bootstrap/Collapse";
 
 function VehicleModelCard(props) {
   function updateVehicleModel(e) {

@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import ManufacturerCard from "./ManufacturerCard";
-import ManufacturerForm from "./ManufacturerForm";
-import Collapse from "react-bootstrap/Collapse";
 import VehicleModelList from "../Vehicle models/VehicleModelList";
 import AutomobileList from "../Automobile Inventory/AutomobileList";
-import FormModal from "../UI/FormModal";
+import FormModal from "../../UI/FormModal";
 
 function ManufacturerList() {
   const [manufacturers, setManufacturers] = useState([]);

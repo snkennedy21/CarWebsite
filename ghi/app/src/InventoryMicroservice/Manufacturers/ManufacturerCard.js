@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import Card from "../UI/Card";
-import Collapse from "react-bootstrap/Collapse";
+import Card from "../../UI/Card";
 import VehicleModelForm from "../Vehicle models/VehicleModelForm";
 
 function ManufacturerCard(props) {

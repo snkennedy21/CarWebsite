@@ -1,7 +1,7 @@
 import React from "react";
-import VehicleModelForm from "../Vehicle models/VehicleModelForm";
-import ManufacturerForm from "../Manufacturers/ManufacturerForm";
-import AutomobileForm from "../Automobile Inventory/AutomobileForm";
+import VehicleModelForm from "../InventoryMicroservice/Vehicle models/VehicleModelForm";
+import AutomobileForm from "../InventoryMicroservice/Automobile Inventory/AutomobileForm";
+import ManufacturerForm from "../InventoryMicroservice/Manufacturers/ManufacturerForm";
 
 function FormModal(props) {
   let form;
