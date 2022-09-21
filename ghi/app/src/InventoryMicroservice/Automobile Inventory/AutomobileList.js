@@ -1,8 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useAutomobiles } from "../../Contexts/AutomobilesContext";
+import { AutomobilesListContext } from "../../App";
 
 function AutomobileList(props) {
+  const automobiles = useAutomobiles();
+
   return (
     <div className="my-5 container">
       <div className="justify-content-sm-center">
@@ -18,7 +20,7 @@ function AutomobileList(props) {
             </tr>
           </thead>
           <tbody>
-            {props.automobiles
+            {automobiles
               .filter((auto) => {
                 return auto.is_sold === false;
               })

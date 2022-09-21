@@ -158,7 +158,7 @@ function InventoryPage(props) {
         openAutomobileForm={openAutomobileFormHandler}
         updateSelectedVehicleModel={updateSelectedVehicleModelHandler}
       />
-      <AutomobileList automobiles={props.automobilesArray} />
+      <AutomobileList />
     </React.Fragment>
   );
 }

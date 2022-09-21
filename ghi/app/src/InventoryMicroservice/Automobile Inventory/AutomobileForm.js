@@ -1,7 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useAutomobilesUpdate } from "../../Contexts/AutomobilesContext";
 
 function AutomobileForm(props) {
+  const updateAutomobiles = useAutomobilesUpdate();
+
   const [state, setState] = useState({
     color: "",
     year: "",
@@ -29,7 +32,7 @@ function AutomobileForm(props) {
 
     if (response.ok) {
       const newAutomobile = await response.json();
-      props.updateAutomobilesList(newAutomobile);
+      updateAutomobiles(newAutomobile);
     }
 
     setState((prevState) => {
