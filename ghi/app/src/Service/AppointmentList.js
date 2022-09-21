@@ -48,7 +48,6 @@ class AppointmentList extends React.Component {
         const automobilesUrl = "http://localhost:8100/api/automobiles/";
         const automobilesResponse = await fetch(automobilesUrl);
         const automobilesData = await automobilesResponse.json();
-        console.log(automobilesData);
         const customerResponse = await fetch(customersUrl);
         const customerData = await customerResponse.json();
         const response = await fetch(appointmentsUrl);
@@ -63,6 +62,8 @@ class AppointmentList extends React.Component {
                     hours = "12"; // in case some insane person is getting work done between 12a-1a (after setting am/pm)
                 } else if (Number(hours) >= 13) {
                     hours = String(Number(hours)-12); // translate from military time
+                } else {
+                    hours = String(Number(hours));
                 }
                 appointment.time = `${hours}:${mins} ${amOrPm}`;
                 // change customer to match customer name
@@ -98,8 +99,8 @@ class AppointmentList extends React.Component {
                         {this.state.appointments.filter(appointment => !appointment.finished).map((appointment) => {
                             return (
                                 <tr key={appointment.href}>
-                                    <td className={appointment.is_VIP ? "align-middle text-success font-weight-bold" : "align-middle"}>{appointment.customer.name}</td>
                                     <td className={appointment.is_VIP ? "align-middle text-success font-weight-bold" : "align-middle"}>{appointment.vin}</td>
+                                    <td className={appointment.is_VIP ? "align-middle text-success font-weight-bold" : "align-middle"}>{appointment.customer.name}</td>
                                     <td className={appointment.is_VIP ? "align-middle text-success font-weight-bold" : "align-middle"}>{appointment.date}</td>
                                     <td className={appointment.is_VIP ? "align-middle text-success font-weight-bold" : "align-middle"}>{appointment.time}</td>
                                     <td className={appointment.is_VIP ? "align-middle text-success font-weight-bold" : "align-middle"}>{appointment.technician.name}</td>

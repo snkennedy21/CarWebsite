@@ -28,14 +28,13 @@ class AppointmentHistory extends React.Component {
                     hours = "12"; // in case some insane person is getting work done between 12a-1a (after setting am/pm)
                 } else if (Number(hours) >= 13) {
                     hours = String(Number(hours)-12); // translate from military time
+                } else {
+                    hours = String(Number(hours));
                 }
                 appointment.time = `${hours}:${mins} ${amOrPm}`;
                 // change customer field to match customer name
-                console.log(customerData);
-                console.log("appointment.customer", appointment.customer);
                 appointment.customer = customerData.find(customer => customer.id == appointment.customer);
             });
-            console.log(data.appointments);
             this.setState({appointments: data.appointments});
         } else {
             throw new Error("search response not ok");
@@ -49,13 +48,12 @@ class AppointmentHistory extends React.Component {
     render () {
         return (
             <div className="my-5 container">
-                <form onSubmit={this.handleSearch.bind(this)} id="service-history-search">
-                    <div>
-                        <input onChange={this.handleChange.bind(this)} value={this.state.search} required type="text" placeholder="Enter VIN" name="search" className="form-control"/>
-                    </div>
+                <h1 className="my-2">Service history</h1>
+                <form className="d-flex" onSubmit={this.handleSearch.bind(this)} id="service-history-search">
+                    <input onChange={this.handleChange.bind(this)} value={this.state.search} required type="search" placeholder="Enter VIN" name="search" className="form-control"/>
+                    <button className="btn btn-outline-success me-2 my-sm-0" type="submit">Search</button>
                 </form>
-                <h1 className="my-5">Service history</h1>
-                <table className="table my-5 table-striped">
+                <table className="table my-3 table-striped">
                     <thead>
                         <tr>
                             <th>VIN</th>
