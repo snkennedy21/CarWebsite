@@ -5,8 +5,6 @@ import VehicleModelForm from "./VehicleModelForm";
 import Collapse from "react-bootstrap/Collapse";
 
 function VehicleModelList(props) {
-  const [formIsOpen, setFormIsOpen] = useState(false);
-
   return (
     <React.Fragment>
       <div className="my-5 container">

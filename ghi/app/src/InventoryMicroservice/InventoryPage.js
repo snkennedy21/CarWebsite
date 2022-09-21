@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import React from "react";
 import ManufacturerCard from "./Manufacturers/ManufacturerCard";
 import VehicleModelList from "./Vehicle models/VehicleModelList";
+import ManufacturerList from "./Manufacturers/ManufacturerList";
 import AutomobileList from "./Automobile Inventory/AutomobileList";
 import FormModal from "../UI/FormModal";
 
@@ -114,25 +115,13 @@ function InventoryPage(props) {
           vehicleModelFormOpen={vehicleModelFormOpen}
           automobileFormOpen={automobileFormOpen}
         />
-
-        <h1>Manufacturers</h1>
-        <div className="container">
-          <div className="row gy-4">
-            {manufacturers.map((manufacturer) => {
-              return (
-                <ManufacturerCard
-                  key={manufacturer.id}
-                  manufacturer_id={manufacturer.id}
-                  image={manufacturer.picture_url}
-                  updateVehicleModelList={updateVehicleModelListHandler}
-                  updateSelectedManufacturer={updateSelectedManufacturerHandler}
-                  openVehicleModelForm={openVehicleModelFormHandler}
-                />
-              );
-            })}
-          </div>
-        </div>
       </div>
+      <ManufacturerList
+        manufacturers={manufacturers}
+        updateVehicleModelList={updateVehicleModelListHandler}
+        updateSelectedManufacturer={updateSelectedManufacturerHandler}
+        openVehicleModelForm={openVehicleModelFormHandler}
+      />
       <VehicleModelList
         vehicleModels={vehicleModels}
         openAutomobileForm={openAutomobileFormHandler}
