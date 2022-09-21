@@ -92,7 +92,37 @@ function InventoryPage(props) {
   function updateSelectedVehicleModelHandler(vehicleModel) {
     setSelectedVehicleModel(vehicleModel);
   }
+  // ****************************************************************************** //
+  // FUNCTIONS FOR CREATING UNIQUE FORMS FOR EACH VEHICLE MODLE AND EACH AUTOMOBILE //
+  // ****************************************************************************** //
 
+  let automobileForm = vehicleModels
+    .filter((model) => model.id == selectedVehicleModel)
+    .map((model) => {
+      return (
+        <AutomobileForm
+          key={model.id}
+          updateAutomobilesList={props.updateAutomobilesArray}
+          selectedVehicleModel={selectedVehicleModel}
+        />
+      );
+    });
+
+  let vehicleModelForm = manufacturers
+    .filter((manufacturer) => manufacturer.id == selectedManufacturer)
+    .map((manufacturer) => {
+      return (
+        <VehicleModelForm
+          key={manufacturer.id}
+          updateVehicleModelList={updateVehicleModelListHandler}
+          selectedManufacturer={selectedManufacturer}
+        />
+      );
+    });
+
+  // ************************************** //
+  // RENDER FOR THE INVENTORY MICRO-SERVICE //
+  // ************************************** //
   return (
     <React.Fragment>
       <button
@@ -113,15 +143,8 @@ function InventoryPage(props) {
         <ManufacturerForm
           updateManufacturersList={updateManufacturersListHandler}
         />
-
-        <VehicleModelForm
-          updateVehicleModelList={updateVehicleModelListHandler}
-          selectedManufacturer={selectedManufacturer}
-        />
-        <AutomobileForm
-          updateAutomobilesList={props.updateAutomobilesArray}
-          selectedVehicleModel={selectedVehicleModel}
-        />
+        {vehicleModelForm}
+        {automobileForm}
       </FormModalWrapper>
 
       <ManufacturerList
