@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import React from "react";
-import ManufacturerCard from "./Manufacturers/ManufacturerCard";
 import VehicleModelList from "./Vehicle models/VehicleModelList";
 import ManufacturerList from "./Manufacturers/ManufacturerList";
 import AutomobileList from "./Automobile Inventory/AutomobileList";
@@ -16,11 +15,10 @@ function InventoryPage(props) {
 
   const [selectedManufacturer, setSelectedManufacturer] = useState("");
   const [selectedVehicleModel, setSelectedVehicleModel] = useState("");
-  const [selectedAutomobile, setSelectedAutomobile] = useState("");
 
-  // *************************************************************** //
-  // DATA FETCHES FOR MANUFACTURERS, VEHICLE MODELS, AND AUTOMOBILES //
-  // *************************************************************** //
+  // ************************************************ //
+  // DATA FETCHES FOR MANUFACTURERS AND VEHICLE MODELS//
+  // ************************************************ //
   const fetchManufacturerData = async () => {
     const manufacturersUrl = "http://localhost:8100/api/manufacturers/";
     const manufacturerResponse = await fetch(manufacturersUrl);
@@ -45,9 +43,9 @@ function InventoryPage(props) {
     fetchVehicleModelData();
   }, []);
 
-  // **************************************************************************** //
-  // FUNCTIONS FOR UPDATING STATE OF MANUFACTUERS, VEHICLE MODELS AND AUTOMOBILES //
-  // **************************************************************************** //
+  // *************************************************************** //
+  // FUNCTIONS FOR UPDATING STATE OF MANUFACTUERS AND VEHICLE MODELS //
+  // *************************************************************** //
 
   function updateManufacturersListHandler(manufacturerData) {
     setManufacturers((prevState) => {

@@ -9,7 +9,6 @@ function ManufacturerCard(props) {
     props.openVehicleModelForm();
   }
 
-  const [open, setOpen] = useState(false);
   return (
     <Card>
       <img
