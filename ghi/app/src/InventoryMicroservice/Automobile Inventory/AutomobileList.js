@@ -3,6 +3,7 @@ import { useAutomobiles } from "../../Contexts/AutomobilesContext";
 
 function AutomobileList(props) {
   const automobiles = useAutomobiles();
+  console.log(automobiles);
 
   return (
     <div className="my-5 container">
