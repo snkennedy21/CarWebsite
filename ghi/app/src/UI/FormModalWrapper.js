@@ -1,6 +1,12 @@
 import React from "react";
 
 function FormModalWrapper(props) {
+  let form;
+
+  if (props.manufacturerFormOpen) form = props.children[0];
+  if (props.vehicleModelFormOpen) form = props.children[1];
+  if (props.automobileFormOpen) form = props.children[2];
+
   return (
     <React.Fragment>
       <div
@@ -23,7 +29,7 @@ function FormModalWrapper(props) {
                 aria-label="Close"
               ></button>
             </div>
-            <div className="modal-body">{props.children}</div>
+            <div className="modal-body">{form}</div>
           </div>
         </div>
       </div>

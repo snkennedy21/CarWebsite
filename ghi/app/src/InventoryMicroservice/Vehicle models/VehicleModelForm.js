@@ -5,7 +5,7 @@ function VehicleModelForm(props) {
   const [state, setState] = useState({
     name: "",
     picture_url: "",
-    manufacturer_id: props.manufacturer_id,
+    manufacturer_id: props.selectedManufacturer,
   });
 
   async function submitHandler(e) {

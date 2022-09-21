@@ -6,12 +6,15 @@ function AutomobileForm(props) {
     color: "",
     year: "",
     vin: "",
-    model_id: props.model_id,
+    model_id: props.selectedVehicleModel,
   });
+
+  console.log(state);
 
   async function submitHandler(e) {
     e.preventDefault();
     const data = { ...state };
+    console.log(data);
 
     const automobileUrl = "http://localhost:8100/api/automobiles/";
     const fetchConfig = {

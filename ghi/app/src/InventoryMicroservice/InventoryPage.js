@@ -4,6 +4,10 @@ import VehicleModelList from "./Vehicle models/VehicleModelList";
 import ManufacturerList from "./Manufacturers/ManufacturerList";
 import AutomobileList from "./Automobile Inventory/AutomobileList";
 import FormModal from "../UI/FormModal";
+import FormModalWrapper from "../UI/FormModalWrapper";
+import ManufacturerForm from "./Manufacturers/ManufacturerForm";
+import VehicleModelForm from "./Vehicle models/VehicleModelForm";
+import AutomobileForm from "./Automobile Inventory/AutomobileForm";
 
 function InventoryPage(props) {
   const [manufacturers, setManufacturers] = useState([]);
@@ -91,29 +95,35 @@ function InventoryPage(props) {
 
   return (
     <React.Fragment>
-      <div className="my-5 container">
-        <button
-          type="button"
-          className="btn btn-primary"
-          data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
-          onClick={openManufacturerFormHandler}
-        >
-          Launch demo modal
-        </button>
-        <FormModal
-          vehicleModels={vehicleModels}
-          manufacturers={manufacturers}
-          selectedManufacturer={selectedManufacturer}
-          selectedVehicleModel={selectedVehicleModel}
-          updateVehicleModelList={updateVehicleModelListHandler}
+      <button
+        type="button"
+        className="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+        value={props.manufacturer_id}
+        onClick={openManufacturerFormHandler}
+      >
+        Launch demo modal
+      </button>
+      <FormModalWrapper
+        manufacturerFormOpen={manufacturerFormOpen}
+        vehicleModelFormOpen={vehicleModelFormOpen}
+        automobileFormOpen={automobileFormOpen}
+      >
+        <ManufacturerForm
           updateManufacturersList={updateManufacturersListHandler}
-          updateAutomobilesList={props.updateAutomobilesArray}
-          manufacturerFormOpen={manufacturerFormOpen}
-          vehicleModelFormOpen={vehicleModelFormOpen}
-          automobileFormOpen={automobileFormOpen}
         />
-      </div>
+
+        <VehicleModelForm
+          updateVehicleModelList={updateVehicleModelListHandler}
+          selectedManufacturer={selectedManufacturer}
+        />
+        <AutomobileForm
+          updateAutomobilesList={props.updateAutomobilesArray}
+          selectedVehicleModel={selectedVehicleModel}
+        />
+      </FormModalWrapper>
+
       <ManufacturerList
         manufacturers={manufacturers}
         updateVehicleModelList={updateVehicleModelListHandler}
