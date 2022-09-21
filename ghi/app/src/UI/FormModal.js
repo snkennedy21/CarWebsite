@@ -4,13 +4,21 @@ import ManufacturerForm from "../Manufacturers/ManufacturerForm";
 
 function FormModal(props) {
   let form;
+  // ************************ //
+  // DISPLAY MANUFACTUER FORM //
+  // ************************ //
   if (props.manufacturerFormOpen) {
     form = (
       <ManufacturerForm
         updateManufacturersList={props.updateManufacturersList}
       />
     );
-  } else if (props.vehicleModelFormOpen) {
+  }
+
+  // ************************ //
+  // DISPLAY MANUFACTUER FORM //
+  // ************************ //
+  if (props.vehicleModelFormOpen) {
     form = props.manufacturers
       .filter((manufacturer) => {
         return manufacturer.id == props.selectedManufacturer;

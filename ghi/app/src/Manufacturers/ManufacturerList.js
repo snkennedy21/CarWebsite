@@ -20,6 +20,9 @@ function ManufacturerList() {
   const [selectedVehicleModel, setSelectedVehicleModel] = useState("");
   const [selectedAutomobile, setSelectedAutomobile] = useState("");
 
+  // *************************************************************** //
+  // DATA FETCHES FOR MANUFACTURERS, VEHICLE MODELS, AND AUTOMOBILES //
+  // *************************************************************** //
   const fetchManufacturerData = async () => {
     const manufacturersUrl = "http://localhost:8100/api/manufacturers/";
     const manufacturerResponse = await fetch(manufacturersUrl);
@@ -55,9 +58,9 @@ function ManufacturerList() {
     fetchAutomobileData();
   }, []);
 
-  function updateSelectedManufacturerHandler(manufacturer) {
-    setSelectedManufacturer(manufacturer);
-  }
+  // **************************************************************************** //
+  // FUNCTIONS FOR UPDATING STATE OF MANUFACTUERS, VEHICLE MODELS AND AUTOMOBILES //
+  // **************************************************************************** //
 
   function updateManufacturersListHandler(manufacturerData) {
     setManufacturers((prevState) => {
@@ -77,6 +80,10 @@ function ManufacturerList() {
     });
   }
 
+  // **************************************************************************** //
+  // FUNCTIONS FOR OPENING FORMS FOR MANUFACTUERS, VEHICLE MODELS AND AUTOMOBILES //
+  // **************************************************************************** //
+
   function openManufacturerFormHandler() {
     setManufacturerFormOpen(true);
     setVehicleModelFormOpen(false);
@@ -93,6 +100,10 @@ function ManufacturerList() {
     setManufacturerFormOpen(false);
     setVehicleModelFormOpen(false);
     setAutomobileFormOpen(true);
+  }
+
+  function updateSelectedManufacturerHandler(manufacturer) {
+    setSelectedManufacturer(manufacturer);
   }
 
   return (
