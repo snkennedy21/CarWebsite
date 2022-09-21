@@ -10,13 +10,34 @@ import CustomerForm from "./Customers/CustomerForm";
 import CustomerList from "./Customers/CustomerList";
 import SalesPeopleList from "./SalesPeople/SalesPeopleList";
 import SalesPeopleForm from "./SalesPeople/SalesPeopleForm";
-import VehicleModelList from "./InventoryMicroservice/Vehicle models/VehicleModelList";
-import ManufacturerList from "./InventoryMicroservice/Manufacturers/ManufacturerList";
-import AutomobileList from "./InventoryMicroservice/Automobile Inventory/AutomobileList";
 import SalesForm from "./Sales/SalesForm";
 import SalesList from "./Sales/SalesList";
+import InventoryPage from "./InventoryMicroservice/InventoryPage";
+import { useState, useEffect } from "react";
 
 function App() {
+  const [automobilesArray, setAutomobilesArray] = useState([]);
+
+  async function fetchAutomobileData() {
+    const automobilessUrl = "http://localhost:8100/api/automobiles/";
+    const automobilesResponse = await fetch(automobilessUrl);
+
+    if (automobilesResponse.ok) {
+      const automobilesData = await automobilesResponse.json();
+      setAutomobilesArray(automobilesData.autos);
+    }
+  }
+
+  useEffect(() => {
+    fetchAutomobileData();
+  }, []);
+
+  function updateAutomobilesArrayHandler(newAutomobile) {
+    setAutomobilesArray((prevState) => {
+      return [...prevState, newAutomobile];
+    });
+  }
+
   return (
     <BrowserRouter>
       <Nav />
@@ -27,9 +48,15 @@ function App() {
           {/**************************/}
           {/* INVENTORY MICROSERVICE */}
           {/**************************/}
-          <Route path="manufacturers" element={<ManufacturerList />} />
-          <Route path="vehicle-models" element={<VehicleModelList />} />
-          <Route path="automobiles" element={<AutomobileList />} />
+          <Route
+            path="inventory"
+            element={
+              <InventoryPage
+                updateAutomobilesArray={updateAutomobilesArrayHandler}
+                automobilesArray={automobilesArray}
+              />
+            }
+          />
 
           <Route path="customers">
             <Route path="" element={<CustomerList />} />

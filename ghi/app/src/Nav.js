@@ -36,18 +36,8 @@ function Nav() {
                 aria-labelledby="dropdownMenuButton1"
               >
                 <li>
-                  <Link className="dropdown-item" to="/manufacturers">
-                    Manufacturers
-                  </Link>
-                </li>
-                <li>
-                  <Link className="dropdown-item" to="/vehicle-models">
-                    Models
-                  </Link>
-                </li>
-                <li>
-                  <Link className="dropdown-item" to="/automobiles">
-                    Automobiles
+                  <Link className="dropdown-item" to="/inventory">
+                    Inventory
                   </Link>
                 </li>
               </ul>
