@@ -37,8 +37,6 @@ function AutomobileForm(props) {
         vin: "",
       };
     });
-
-    props.toggleForm();
   }
 
   function inputChangeHandler(e) {

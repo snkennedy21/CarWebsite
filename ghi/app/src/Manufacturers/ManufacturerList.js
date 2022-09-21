@@ -106,6 +106,10 @@ function ManufacturerList() {
     setSelectedManufacturer(manufacturer);
   }
 
+  function updateSelectedVehicleModelHandler(vehicleModel) {
+    setSelectedVehicleModel(vehicleModel);
+  }
+
   return (
     <React.Fragment>
       <div className="my-5 container">
@@ -122,8 +126,10 @@ function ManufacturerList() {
           vehicleModels={vehicleModels}
           manufacturers={manufacturers}
           selectedManufacturer={selectedManufacturer}
+          selectedVehicleModel={selectedVehicleModel}
           updateVehicleModelList={updateVehicleModelListHandler}
           updateManufacturersList={updateManufacturersListHandler}
+          updateAutomobilesList={updateAutomobilesListHandler}
           manufacturerFormOpen={manufacturerFormOpen}
           vehicleModelFormOpen={vehicleModelFormOpen}
           automobileFormOpen={automobileFormOpen}
@@ -149,7 +155,8 @@ function ManufacturerList() {
       </div>
       <VehicleModelList
         vehicleModels={vehicleModels}
-        updateAutomobilesList={updateAutomobilesListHandler}
+        openAutomobileForm={openAutomobileFormHandler}
+        updateSelectedVehicleModel={updateSelectedVehicleModelHandler}
       />
       <AutomobileList automobiles={automobiles} />
     </React.Fragment>

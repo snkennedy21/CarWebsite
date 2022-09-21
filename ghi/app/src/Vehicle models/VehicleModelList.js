@@ -22,7 +22,10 @@ function VehicleModelList(props) {
                     model={model.name}
                     manufacturer={model.manufacturer.name}
                     model_id={model.id}
-                    updateAutomobilesList={props.updateAutomobilesList}
+                    openAutomobileForm={props.openAutomobileForm}
+                    updateSelectedVehicleModel={
+                      props.updateSelectedVehicleModel
+                    }
                   />
                 );
               })}

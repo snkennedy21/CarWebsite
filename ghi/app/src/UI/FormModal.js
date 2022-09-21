@@ -1,6 +1,7 @@
 import React from "react";
 import VehicleModelForm from "../Vehicle models/VehicleModelForm";
 import ManufacturerForm from "../Manufacturers/ManufacturerForm";
+import AutomobileForm from "../Automobile Inventory/AutomobileForm";
 
 function FormModal(props) {
   let form;
@@ -15,9 +16,9 @@ function FormModal(props) {
     );
   }
 
-  // ************************ //
-  // DISPLAY MANUFACTUER FORM //
-  // ************************ //
+  // ************************** //
+  // DISPLAY VEHICLE MODEL FORM //
+  // ************************** //
   if (props.vehicleModelFormOpen) {
     form = props.manufacturers
       .filter((manufacturer) => {
@@ -29,6 +30,26 @@ function FormModal(props) {
             key={manufacturer.id}
             manufacturer_id={manufacturer.id}
             updateVehicleModelList={props.updateVehicleModelList}
+          />
+        );
+      });
+  }
+
+  console.log(props.selectedVehicleModel);
+  // *********************** //
+  // DISPLAY AUTOMOBILE FORM //
+  // *********************** //
+  if (props.automobileFormOpen) {
+    form = props.vehicleModels
+      .filter((model) => {
+        return model.id == props.selectedVehicleModel;
+      })
+      .map((model) => {
+        return (
+          <AutomobileForm
+            key={model.id}
+            model_id={model.id}
+            updateAutomobilesList={props.updateAutomobilesList}
           />
         );
       });
