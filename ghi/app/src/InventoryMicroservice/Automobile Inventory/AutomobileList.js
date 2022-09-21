@@ -1,6 +1,5 @@
 import React from "react";
 import { useAutomobiles } from "../../Contexts/AutomobilesContext";
-import { AutomobilesListContext } from "../../App";
 
 function AutomobileList(props) {
   const automobiles = useAutomobiles();
@@ -8,7 +7,7 @@ function AutomobileList(props) {
   return (
     <div className="my-5 container">
       <div className="justify-content-sm-center">
-        <h1>Vehicle Models</h1>
+        <h1>Automobiles</h1>
         <table className="table my-5 table-striped">
           <thead>
             <tr>

@@ -17,8 +17,6 @@ import InventoryPage from "./InventoryMicroservice/InventoryPage";
 import { useState, useEffect } from "react";
 import { AutomobilesProvider } from "./Contexts/AutomobilesContext";
 
-export const AutomobilesListContext = React.createContext();
-
 function App() {
   return (
     <BrowserRouter>
