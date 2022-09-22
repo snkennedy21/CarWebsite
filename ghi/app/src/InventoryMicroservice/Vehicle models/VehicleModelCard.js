@@ -1,11 +1,13 @@
 import React from "react";
 import { useState } from "react";
-import Card from "../UI/Card";
+import Card from "../../UI/Card";
 import AutomobileForm from "../Automobile Inventory/AutomobileForm";
-import Collapse from "react-bootstrap/Collapse";
 
 function VehicleModelCard(props) {
-  const [open, setOpen] = useState(false);
+  function updateVehicleModel(e) {
+    props.openAutomobileForm();
+    props.updateSelectedVehicleModel(e.target.value);
+  }
 
   return (
     <Card>
@@ -19,21 +21,15 @@ function VehicleModelCard(props) {
         <p className="card-text">{props.manufacturer}</p>
       </div>
       <button
-        onClick={() => setOpen(!open)}
-        aria-controls="example-collapse-text"
-        aria-expanded={open}
+        type="button"
         className="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+        value={props.model_id}
+        onClick={updateVehicleModel}
       >
-        Add Automobile to Inventory
+        Launch demo modal
       </button>
-      <Collapse in={open}>
-        <div id="example-collapse-text">
-          <AutomobileForm
-            model_id={props.model_id}
-            updateAutomobilesList={props.updateAutomobilesList}
-          />
-        </div>
-      </Collapse>
     </Card>
   );
 }

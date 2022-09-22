@@ -1,7 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import {
+  useAutomobilesArrayRemove,
+  useAutomobilesArray,
+} from "../Contexts/AutomobilesContext";
 
 function SalesForm() {
+  const removeSoldAutomobileFromAutomobilesArray = useAutomobilesArrayRemove();
+  const automobiles = useAutomobilesArray();
+
   const [state, setState] = useState({
     automobiles: [],
     sales_people: [],
@@ -74,6 +81,8 @@ function SalesForm() {
       },
     };
 
+    console.log(data);
+
     const automobileUrl = `http://localhost:8100/api/automobiles/${data.automobile}/`;
 
     const automobileResponse = await fetch(automobileUrl, {
@@ -86,7 +95,13 @@ function SalesForm() {
 
     const saleResponse = await fetch(saleUrl, fetchConfigPost);
 
-    console.log(state);
+    console.log(data);
+
+    let updatedAutomobiles = automobiles.filter((auto) => {
+      return auto.vin != data.automobile;
+    });
+
+    removeSoldAutomobileFromAutomobilesArray(updatedAutomobiles);
 
     setState((prevState) => {
       return {
@@ -98,8 +113,6 @@ function SalesForm() {
         sale_price: "",
       };
     });
-
-    console.log(state);
   }
 
   return (

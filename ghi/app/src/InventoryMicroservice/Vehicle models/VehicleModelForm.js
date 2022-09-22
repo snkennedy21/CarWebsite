@@ -5,12 +5,13 @@ function VehicleModelForm(props) {
   const [state, setState] = useState({
     name: "",
     picture_url: "",
-    manufacturer_id: props.manufacturer_id,
+    manufacturer_id: props.selectedManufacturer,
   });
 
   async function submitHandler(e) {
     e.preventDefault();
     const data = { ...state };
+    console.log(data);
     delete data.manufacturers;
 
     const modelUrl = "http://localhost:8100/api/models/";
@@ -34,7 +35,6 @@ function VehicleModelForm(props) {
         ...prevState,
         name: "",
         picture_url: "",
-        manufacturer_id: "",
       };
     });
   }

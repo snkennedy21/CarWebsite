@@ -1,12 +1,15 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useAutomobilesArrayAdd } from "../../Contexts/AutomobilesContext";
 
 function AutomobileForm(props) {
+  const addNewAutomobileToAutomobilesArray = useAutomobilesArrayAdd();
+
   const [state, setState] = useState({
     color: "",
     year: "",
     vin: "",
-    model_id: props.model_id,
+    model_id: props.selectedVehicleModel,
   });
 
   async function submitHandler(e) {
@@ -26,7 +29,7 @@ function AutomobileForm(props) {
 
     if (response.ok) {
       const newAutomobile = await response.json();
-      props.updateAutomobilesList(newAutomobile);
+      addNewAutomobileToAutomobilesArray(newAutomobile);
     }
 
     setState((prevState) => {
@@ -37,8 +40,6 @@ function AutomobileForm(props) {
         vin: "",
       };
     });
-
-    props.toggleForm();
   }
 
   function inputChangeHandler(e) {

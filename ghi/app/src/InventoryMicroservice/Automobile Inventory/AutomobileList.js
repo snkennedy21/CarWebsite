@@ -1,12 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useAutomobilesArray } from "../../Contexts/AutomobilesContext";
 
 function AutomobileList(props) {
+  const automobiles = useAutomobilesArray();
+
   return (
     <div className="my-5 container">
       <div className="justify-content-sm-center">
-        <h1>Vehicle Models</h1>
+        <h1>Automobiles</h1>
         <table className="table my-5 table-striped">
           <thead>
             <tr>
@@ -18,7 +19,7 @@ function AutomobileList(props) {
             </tr>
           </thead>
           <tbody>
-            {props.automobiles
+            {automobiles
               .filter((auto) => {
                 return auto.is_sold === false;
               })
