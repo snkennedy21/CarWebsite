@@ -2,8 +2,6 @@ import React from "react";
 import VehicleModelCard from "./VehicleModelCard";
 
 function VehicleModelList(props) {
-  console.log(props.vehicleModels);
-
   let vehicleModelsList;
   props.vehicleModels.length === 0
     ? (vehicleModelsList = (

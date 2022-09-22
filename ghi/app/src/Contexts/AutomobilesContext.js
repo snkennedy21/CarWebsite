@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 
 const AutomobilesContext = React.createContext();
 const AutomobilesUpdateContext = React.createContext();
+const AutomobilesRenderContext = React.createContext();
 
 export function useAutomobiles() {
   return useContext(AutomobilesContext);
@@ -9,6 +10,10 @@ export function useAutomobiles() {
 
 export function useAutomobilesUpdate() {
   return useContext(AutomobilesUpdateContext);
+}
+
+export function useAutomobilesUnsold() {
+  return useContext(AutomobilesRenderContext);
 }
 
 export function AutomobilesProvider({ children }) {
@@ -34,10 +39,18 @@ export function AutomobilesProvider({ children }) {
     });
   }
 
+  function renderUnsoldAutomobiles(unsoldAutomobiles) {
+    console.log("unsolde automobiles", unsoldAutomobiles);
+    setAutomobilesArray(unsoldAutomobiles);
+    console.log(automobilesArray);
+  }
+
   return (
     <AutomobilesContext.Provider value={automobilesArray}>
       <AutomobilesUpdateContext.Provider value={updateAutomobilesArrayHandler}>
-        {children}
+        <AutomobilesRenderContext.Provider value={renderUnsoldAutomobiles}>
+          {children}
+        </AutomobilesRenderContext.Provider>
       </AutomobilesUpdateContext.Provider>
     </AutomobilesContext.Provider>
   );

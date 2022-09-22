@@ -1,7 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import {
+  useAutomobilesUnsold,
+  useAutomobiles,
+} from "../Contexts/AutomobilesContext";
 
 function SalesForm() {
+  const reRenderAutomobiles = useAutomobilesUnsold();
+  const automobiles = useAutomobiles();
+
   const [state, setState] = useState({
     automobiles: [],
     sales_people: [],
@@ -74,6 +81,8 @@ function SalesForm() {
       },
     };
 
+    console.log(data);
+
     const automobileUrl = `http://localhost:8100/api/automobiles/${data.automobile}/`;
 
     const automobileResponse = await fetch(automobileUrl, {
@@ -86,7 +95,11 @@ function SalesForm() {
 
     const saleResponse = await fetch(saleUrl, fetchConfigPost);
 
-    console.log(state);
+    let updatedAutomobiles = automobiles.filter((auto) => {
+      return auto.id != data.automobile;
+    });
+
+    reRenderAutomobiles(updatedAutomobiles);
 
     setState((prevState) => {
       return {
@@ -98,8 +111,6 @@ function SalesForm() {
         sale_price: "",
       };
     });
-
-    console.log(state);
   }
 
   return (

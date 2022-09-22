@@ -10,7 +10,6 @@ const ManufacturerForm = function (props) {
   async function submitHandler(e) {
     e.preventDefault();
     const data = { ...state };
-    console.log(data);
     const manufacturerUrl = "http://localhost:8100/api/manufacturers/";
     const fetchConfig = {
       method: "post",

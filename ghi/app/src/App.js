@@ -14,7 +14,6 @@ import SalesPeopleForm from "./SalesPeople/SalesPeopleForm";
 import SalesForm from "./Sales/SalesForm";
 import SalesList from "./Sales/SalesList";
 import InventoryPage from "./InventoryMicroservice/InventoryPage";
-import { useState, useEffect } from "react";
 import { AutomobilesProvider } from "./Contexts/AutomobilesContext";
 
 function App() {
