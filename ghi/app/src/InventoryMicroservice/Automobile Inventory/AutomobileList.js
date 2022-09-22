@@ -1,8 +1,8 @@
 import React from "react";
-import { useAutomobiles } from "../../Contexts/AutomobilesContext";
+import { useAutomobilesArray } from "../../Contexts/AutomobilesContext";
 
 function AutomobileList(props) {
-  const automobiles = useAutomobiles();
+  const automobiles = useAutomobilesArray();
 
   return (
     <div className="my-5 container">

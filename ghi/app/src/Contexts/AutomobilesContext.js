@@ -1,19 +1,19 @@
 import React, { useState, useContext, useEffect } from "react";
 
-const AutomobilesContext = React.createContext();
-const AutomobilesUpdateContext = React.createContext();
-const AutomobilesRenderContext = React.createContext();
+const AutomobilesArrayContext = React.createContext();
+const AutomobilesArrayAddContext = React.createContext();
+const AutomobilesArrayRemoveContext = React.createContext();
 
-export function useAutomobiles() {
-  return useContext(AutomobilesContext);
+export function useAutomobilesArray() {
+  return useContext(AutomobilesArrayContext);
 }
 
-export function useAutomobilesUpdate() {
-  return useContext(AutomobilesUpdateContext);
+export function useAutomobilesArrayAdd() {
+  return useContext(AutomobilesArrayAddContext);
 }
 
-export function useAutomobilesUnsold() {
-  return useContext(AutomobilesRenderContext);
+export function useAutomobilesArrayRemove() {
+  return useContext(AutomobilesArrayRemoveContext);
 }
 
 export function AutomobilesProvider({ children }) {
@@ -33,25 +33,28 @@ export function AutomobilesProvider({ children }) {
     fetchAutomobileData();
   }, []);
 
-  function updateAutomobilesArrayHandler(newAutomobile) {
+  function addNewAutomobileToAutomobilesArrayHandler(newAutomobile) {
     setAutomobilesArray((prevState) => {
       return [...prevState, newAutomobile];
     });
   }
 
-  function renderUnsoldAutomobiles(unsoldAutomobiles) {
-    console.log("unsolde automobiles", unsoldAutomobiles);
+  function removeSoldAutomobileFromAutomobilesArrayHandler(unsoldAutomobiles) {
+    console.log("updated automobiles", unsoldAutomobiles);
     setAutomobilesArray(unsoldAutomobiles);
-    console.log(automobilesArray);
   }
 
   return (
-    <AutomobilesContext.Provider value={automobilesArray}>
-      <AutomobilesUpdateContext.Provider value={updateAutomobilesArrayHandler}>
-        <AutomobilesRenderContext.Provider value={renderUnsoldAutomobiles}>
+    <AutomobilesArrayContext.Provider value={automobilesArray}>
+      <AutomobilesArrayAddContext.Provider
+        value={addNewAutomobileToAutomobilesArrayHandler}
+      >
+        <AutomobilesArrayRemoveContext.Provider
+          value={removeSoldAutomobileFromAutomobilesArrayHandler}
+        >
           {children}
-        </AutomobilesRenderContext.Provider>
-      </AutomobilesUpdateContext.Provider>
-    </AutomobilesContext.Provider>
+        </AutomobilesArrayRemoveContext.Provider>
+      </AutomobilesArrayAddContext.Provider>
+    </AutomobilesArrayContext.Provider>
   );
 }

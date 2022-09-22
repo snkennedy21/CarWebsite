@@ -1,13 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import {
-  useAutomobilesUnsold,
-  useAutomobiles,
+  useAutomobilesArrayRemove,
+  useAutomobilesArray,
 } from "../Contexts/AutomobilesContext";
 
 function SalesForm() {
-  const reRenderAutomobiles = useAutomobilesUnsold();
-  const automobiles = useAutomobiles();
+  const removeSoldAutomobileFromAutomobilesArray = useAutomobilesArrayRemove();
+  const automobiles = useAutomobilesArray();
 
   const [state, setState] = useState({
     automobiles: [],
@@ -95,11 +95,13 @@ function SalesForm() {
 
     const saleResponse = await fetch(saleUrl, fetchConfigPost);
 
+    console.log(data);
+
     let updatedAutomobiles = automobiles.filter((auto) => {
-      return auto.id != data.automobile;
+      return auto.vin != data.automobile;
     });
 
-    reRenderAutomobiles(updatedAutomobiles);
+    removeSoldAutomobileFromAutomobilesArray(updatedAutomobiles);
 
     setState((prevState) => {
       return {
